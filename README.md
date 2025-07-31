@@ -156,6 +156,11 @@ This marketplace represents a complete trading ecosystem within the Nexus Wallet
    node build-nexus-module.js
    ```
 
+### **Wallet Requirements**
+
+1. Please ensure Litemode is disabled.
+2. Enable Multi-User Environment.
+
 ### **Module Installation**
 
 1. **Download** the latest `Nexus-p2p-marketplace.zip` from releases
