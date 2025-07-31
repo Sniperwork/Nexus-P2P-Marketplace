@@ -1,0 +1,23 @@
+
+{
+  "name": "enhanced-p2p-marketplace",
+  "displayName": "Enhanced P2P Marketplace",
+  "version": "1.0.0",
+  "targetWalletVersion": "3.2.0",
+  "type": "app",
+  "description": "Advanced P2P marketplace with multi-token trading support, including cross-token pairs (Token/Token) beyond traditional Token/NXS pairs. Features enhanced token discovery, automatic account detection, and comprehensive trading pair validation.",
+  "entry": "dist/index.html",
+  "icon": "dist/react.svg",
+  "author": {
+    "name": "Balu",
+    "email": "plurklayout@gmail.com"
+  },
+  "options": {
+    "wrapInPanel": false
+  },
+  "files": [
+    "dist/index.html",
+    "dist/js/app.js",
+    "dist/react.svg"
+  ]
+}

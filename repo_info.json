@@ -1,0 +1,72 @@
+{
+  "repository": {
+    "name": "Nexus-p2p-marketplace",
+    "description": "Nexus P2P Marketplace with Cross-Token Trading Support",
+    "url": "https://github.com/nexus-devs/enhanced-p2p-marketplace",
+    "branch": "main",
+    "commit": "latest",
+    "version": "1.0.0"
+  },
+  "build": {
+    "timestamp": "2025-07-19T12:00:00Z",
+    "environment": "production",
+    "buildTool": "webpack",
+    "nodeVersion": "18.17.0",
+    "dependencies": {
+      "react": "^18.2.0",
+      "@emotion/react": "^11.11.0",
+      "@emotion/styled": "^11.11.0",
+      "react-redux": "^8.1.0",
+      "@reduxjs/toolkit": "^1.9.0"
+    }
+  },
+  "deployment": {
+    "target": "nexus-wallet",
+    "format": "zip",
+    "structure": {
+      "dist/": "Built application files",
+      "dist/index.html": "Main application entry point",
+      "dist/js/app.js": "Bundled JavaScript application",
+      "dist/marketplace-icon.svg": "Application icon",
+      "nxs_package.json": "Nexus package configuration",
+      "repo_info.json": "Repository and build information"
+    }
+  },
+  "features": {
+    "crossTokenTrading": {
+      "enabled": true,
+      "description": "Support for Token/Token trading pairs (e.g., CARBON/GOLD)",
+      "implementation": "Enhanced token discovery with automatic pair generation"
+    },
+    "enhancedTokenDiscovery": {
+      "enabled": true,
+      "description": "Automatic discovery of user tokens and generation of trading pairs",
+      "implementation": "Scans user accounts and tokens to create comprehensive trading options"
+    },
+    "automaticAccountDetection": {
+      "enabled": true,
+      "description": "Auto-detection of required accounts for trading operations",
+      "implementation": "Smart account matching based on token tickers and balances"
+    },
+    "tradingPairValidation": {
+      "enabled": true,
+      "description": "Comprehensive validation of trading pair requirements",
+      "implementation": "Validates account availability and balances before order creation"
+    }
+  },
+  "changelog": {
+    "2.0.0": {
+      "date": "2024-12-19",
+      "type": "major",
+      "summary": "Added cross-token trading support and enhanced token discovery",
+      "details": [
+        "Implemented Token/Token trading pairs beyond Token/NXS",
+        "Enhanced token discovery system for multi-user environments",
+        "Improved automatic account detection and validation",
+        "Better UI organization with grouped trading pairs",
+        "Enhanced error handling and user feedback",
+        "Comprehensive logging for debugging and monitoring"
+      ]
+    }
+  }
+}
