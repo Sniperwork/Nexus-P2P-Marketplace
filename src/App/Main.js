@@ -519,24 +519,88 @@ const StyledTextField = styled(TextField)(({ variant = 'default' }) => ({
   background: variant === 'premium'
     ? `
         linear-gradient(135deg, 
-          rgba(139, 92, 246, 0.15) 0%, 
-          rgba(99, 102, 241, 0.12) 50%, 
-          rgba(168, 85, 247, 0.08) 100%
+          rgba(139, 92, 246, 0.18) 0%, 
+          rgba(99, 102, 241, 0.15) 50%, 
+          rgba(168, 85, 247, 0.12) 100%
         )
       `
     : variant === 'accent'
     ? `
         linear-gradient(135deg, 
-          rgba(6, 182, 212, 0.15) 0%, 
-          rgba(14, 165, 233, 0.12) 50%, 
-          rgba(59, 130, 246, 0.08) 100%
+          rgba(6, 182, 212, 0.18) 0%, 
+          rgba(14, 165, 233, 0.15) 50%, 
+          rgba(59, 130, 246, 0.12) 100%
+        )
+      `
+    : variant === 'wallet'
+    ? `
+        linear-gradient(135deg, 
+          rgba(16, 185, 129, 0.18) 0%, 
+          rgba(5, 150, 105, 0.15) 50%, 
+          rgba(4, 120, 87, 0.12) 100%
+        )
+      `
+    : variant === 'transactions'
+    ? `
+        linear-gradient(135deg, 
+          rgba(245, 158, 11, 0.18) 0%, 
+          rgba(217, 119, 6, 0.15) 50%, 
+          rgba(180, 83, 9, 0.12) 100%
+        )
+      `
+    : variant === 'accounts'
+    ? `
+        linear-gradient(135deg, 
+          rgba(99, 102, 241, 0.18) 0%, 
+          rgba(79, 70, 229, 0.15) 50%, 
+          rgba(67, 56, 202, 0.12) 100%
+        )
+      `
+    : variant === 'tokens'
+    ? `
+        linear-gradient(135deg, 
+          rgba(168, 85, 247, 0.18) 0%, 
+          rgba(147, 51, 234, 0.15) 50%, 
+          rgba(126, 34, 206, 0.12) 100%
+        )
+      `
+    : variant === 'staking'
+    ? `
+        linear-gradient(135deg, 
+          rgba(239, 68, 68, 0.18) 0%, 
+          rgba(220, 38, 38, 0.15) 50%, 
+          rgba(185, 28, 28, 0.12) 100%
+        )
+      `
+    : variant === 'advanced'
+    ? `
+        linear-gradient(135deg, 
+          rgba(107, 114, 128, 0.18) 0%, 
+          rgba(75, 85, 99, 0.15) 50%, 
+          rgba(55, 65, 81, 0.12) 100%
+        )
+      `
+    : variant === 'profile'
+    ? `
+        linear-gradient(135deg, 
+          rgba(14, 165, 233, 0.18) 0%, 
+          rgba(2, 132, 199, 0.15) 50%, 
+          rgba(3, 105, 161, 0.12) 100%
+        )
+      `
+    : variant === 'session'
+    ? `
+        linear-gradient(135deg, 
+          rgba(236, 72, 153, 0.18) 0%, 
+          rgba(219, 39, 119, 0.15) 50%, 
+          rgba(190, 24, 93, 0.12) 100%
         )
       `
     : `
         linear-gradient(135deg, 
-          rgba(30, 41, 59, 0.85) 0%, 
-          rgba(51, 65, 85, 0.75) 50%, 
-          rgba(71, 85, 105, 0.65) 100%
+          rgba(30, 41, 59, 0.90) 0%, 
+          rgba(51, 65, 85, 0.80) 50%, 
+          rgba(71, 85, 105, 0.70) 100%
         )
       `,
   backdropFilter: 'blur(24px) saturate(180%)',
@@ -545,7 +609,23 @@ const StyledTextField = styled(TextField)(({ variant = 'default' }) => ({
     ? '1px solid rgba(139, 92, 246, 0.25)'
     : variant === 'accent'
     ? '1px solid rgba(6, 182, 212, 0.25)'
-    : '1px solid rgba(148, 163, 184, 0.15)',
+    : variant === 'wallet'
+    ? '1px solid rgba(16, 185, 129, 0.25)'
+    : variant === 'transactions'
+    ? '1px solid rgba(245, 158, 11, 0.25)'
+    : variant === 'accounts'
+    ? '1px solid rgba(99, 102, 241, 0.25)'
+    : variant === 'tokens'
+    ? '1px solid rgba(168, 85, 247, 0.25)'
+    : variant === 'staking'
+    ? '1px solid rgba(239, 68, 68, 0.25)'
+    : variant === 'advanced'
+    ? '1px solid rgba(107, 114, 128, 0.25)'
+    : variant === 'profile'
+    ? '1px solid rgba(14, 165, 233, 0.25)'
+    : variant === 'session'
+    ? '1px solid rgba(236, 72, 153, 0.25)'
+    : '1px solid rgba(148, 163, 184, 0.18)',
   borderRadius: '16px',
   color: '#f8fafc',
   padding: '18px 24px',
@@ -569,10 +649,66 @@ const StyledTextField = styled(TextField)(({ variant = 'default' }) => ({
         inset 0 1px 0 rgba(255, 255, 255, 0.08),
         inset 0 -1px 0 rgba(6, 182, 212, 0.1)
       `
-    : `
-        0 8px 32px rgba(0, 0, 0, 0.3),
+    : variant === 'wallet'
+    ? `
+        0 12px 40px rgba(16, 185, 129, 0.12),
+        0 4px 16px rgba(0, 0, 0, 0.25),
         inset 0 1px 0 rgba(255, 255, 255, 0.08),
-        inset 0 -1px 0 rgba(148, 163, 184, 0.05)
+        inset 0 -1px 0 rgba(16, 185, 129, 0.1)
+      `
+    : variant === 'transactions'
+    ? `
+        0 12px 40px rgba(245, 158, 11, 0.12),
+        0 4px 16px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        inset 0 -1px 0 rgba(245, 158, 11, 0.1)
+      `
+    : variant === 'accounts'
+    ? `
+        0 12px 40px rgba(99, 102, 241, 0.12),
+        0 4px 16px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        inset 0 -1px 0 rgba(99, 102, 241, 0.1)
+      `
+    : variant === 'tokens'
+    ? `
+        0 12px 40px rgba(168, 85, 247, 0.12),
+        0 4px 16px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        inset 0 -1px 0 rgba(168, 85, 247, 0.1)
+      `
+    : variant === 'staking'
+    ? `
+        0 12px 40px rgba(239, 68, 68, 0.12),
+        0 4px 16px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        inset 0 -1px 0 rgba(239, 68, 68, 0.1)
+      `
+    : variant === 'advanced'
+    ? `
+        0 12px 40px rgba(107, 114, 128, 0.12),
+        0 4px 16px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        inset 0 -1px 0 rgba(107, 114, 128, 0.1)
+      `
+    : variant === 'profile'
+    ? `
+        0 12px 40px rgba(14, 165, 233, 0.12),
+        0 4px 16px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        inset 0 -1px 0 rgba(14, 165, 233, 0.1)
+      `
+    : variant === 'session'
+    ? `
+        0 12px 40px rgba(236, 72, 153, 0.12),
+        0 4px 16px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        inset 0 -1px 0 rgba(236, 72, 153, 0.1)
+      `
+    : `
+        0 10px 35px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(148, 163, 184, 0.08)
       `,
   transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
   position: 'relative',
@@ -619,6 +755,22 @@ const StyledTextField = styled(TextField)(({ variant = 'default' }) => ({
       ? 'rgba(139, 92, 246, 0.5)'
       : variant === 'accent'
       ? 'rgba(6, 182, 212, 0.5)'
+      : variant === 'wallet'
+      ? 'rgba(16, 185, 129, 0.5)'
+      : variant === 'transactions'
+      ? 'rgba(245, 158, 11, 0.5)'
+      : variant === 'accounts'
+      ? 'rgba(99, 102, 241, 0.5)'
+      : variant === 'tokens'
+      ? 'rgba(168, 85, 247, 0.5)'
+      : variant === 'staking'
+      ? 'rgba(239, 68, 68, 0.5)'
+      : variant === 'advanced'
+      ? 'rgba(107, 114, 128, 0.5)'
+      : variant === 'profile'
+      ? 'rgba(14, 165, 233, 0.5)'
+      : variant === 'session'
+      ? 'rgba(236, 72, 153, 0.5)'
       : 'rgba(148, 163, 184, 0.4)',
     outline: 'none',
     boxShadow: variant === 'premium'
@@ -635,6 +787,62 @@ const StyledTextField = styled(TextField)(({ variant = 'default' }) => ({
           0 8px 24px rgba(0, 0, 0, 0.35),
           inset 0 1px 0 rgba(255, 255, 255, 0.12)
         `
+      : variant === 'wallet'
+      ? `
+          0 0 0 3px rgba(16, 185, 129, 0.25),
+          0 16px 48px rgba(16, 185, 129, 0.12),
+          0 8px 24px rgba(0, 0, 0, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12)
+        `
+      : variant === 'transactions'
+      ? `
+          0 0 0 3px rgba(245, 158, 11, 0.25),
+          0 16px 48px rgba(245, 158, 11, 0.12),
+          0 8px 24px rgba(0, 0, 0, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12)
+        `
+      : variant === 'accounts'
+      ? `
+          0 0 0 3px rgba(99, 102, 241, 0.25),
+          0 16px 48px rgba(99, 102, 241, 0.12),
+          0 8px 24px rgba(0, 0, 0, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12)
+        `
+      : variant === 'tokens'
+      ? `
+          0 0 0 3px rgba(168, 85, 247, 0.25),
+          0 16px 48px rgba(168, 85, 247, 0.12),
+          0 8px 24px rgba(0, 0, 0, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12)
+        `
+      : variant === 'staking'
+      ? `
+          0 0 0 3px rgba(239, 68, 68, 0.25),
+          0 16px 48px rgba(239, 68, 68, 0.12),
+          0 8px 24px rgba(0, 0, 0, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12)
+        `
+      : variant === 'advanced'
+      ? `
+          0 0 0 3px rgba(107, 114, 128, 0.25),
+          0 16px 48px rgba(107, 114, 128, 0.12),
+          0 8px 24px rgba(0, 0, 0, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12)
+        `
+      : variant === 'profile'
+      ? `
+          0 0 0 3px rgba(14, 165, 233, 0.25),
+          0 16px 48px rgba(14, 165, 233, 0.12),
+          0 8px 24px rgba(0, 0, 0, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12)
+        `
+      : variant === 'session'
+      ? `
+          0 0 0 3px rgba(236, 72, 153, 0.25),
+          0 16px 48px rgba(236, 72, 153, 0.12),
+          0 8px 24px rgba(0, 0, 0, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12)
+        `
       : `
           0 0 0 3px rgba(148, 163, 184, 0.2),
           0 12px 40px rgba(0, 0, 0, 0.4),
@@ -648,6 +856,22 @@ const StyledTextField = styled(TextField)(({ variant = 'default' }) => ({
       ? 'rgba(139, 92, 246, 0.3)'
       : variant === 'accent'
       ? 'rgba(6, 182, 212, 0.3)'
+      : variant === 'wallet'
+      ? 'rgba(16, 185, 129, 0.3)'
+      : variant === 'transactions'
+      ? 'rgba(245, 158, 11, 0.3)'
+      : variant === 'accounts'
+      ? 'rgba(99, 102, 241, 0.3)'
+      : variant === 'tokens'
+      ? 'rgba(168, 85, 247, 0.3)'
+      : variant === 'staking'
+      ? 'rgba(239, 68, 68, 0.3)'
+      : variant === 'advanced'
+      ? 'rgba(107, 114, 128, 0.3)'
+      : variant === 'profile'
+      ? 'rgba(14, 165, 233, 0.3)'
+      : variant === 'session'
+      ? 'rgba(236, 72, 153, 0.3)'
       : 'rgba(148, 163, 184, 0.25)',
     transform: 'translateY(-1px)',
     boxShadow: variant === 'premium'
@@ -662,8 +886,56 @@ const StyledTextField = styled(TextField)(({ variant = 'default' }) => ({
           0 6px 20px rgba(0, 0, 0, 0.3),
           inset 0 1px 0 rgba(255, 255, 255, 0.1)
         `
+      : variant === 'wallet'
+      ? `
+          0 12px 40px rgba(16, 185, 129, 0.1),
+          0 6px 20px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1)
+        `
+      : variant === 'transactions'
+      ? `
+          0 12px 40px rgba(245, 158, 11, 0.1),
+          0 6px 20px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1)
+        `
+      : variant === 'accounts'
+      ? `
+          0 12px 40px rgba(99, 102, 241, 0.1),
+          0 6px 20px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1)
+        `
+      : variant === 'tokens'
+      ? `
+          0 12px 40px rgba(168, 85, 247, 0.1),
+          0 6px 20px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1)
+        `
+      : variant === 'staking'
+      ? `
+          0 12px 40px rgba(239, 68, 68, 0.1),
+          0 6px 20px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1)
+        `
+      : variant === 'advanced'
+      ? `
+          0 12px 40px rgba(107, 114, 128, 0.1),
+          0 6px 20px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1)
+        `
+      : variant === 'profile'
+      ? `
+          0 12px 40px rgba(14, 165, 233, 0.1),
+          0 6px 20px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1)
+        `
+      : variant === 'session'
+      ? `
+          0 12px 40px rgba(236, 72, 153, 0.1),
+          0 6px 20px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1)
+        `
       : `
-          0 10px 35px rgba(0, 0, 0, 0.35),
+          0 12px 38px rgba(0, 0, 0, 0.38),
           inset 0 1px 0 rgba(255, 255, 255, 0.12)
         `,
   },
@@ -690,17 +962,17 @@ const ActionButton = styled(Button)(({ variant = 'primary', size = 'medium' }) =
   background: variant === 'primary'
     ? `
         linear-gradient(145deg, 
-          #1e293b 0%, 
-          #334155 50%, 
-          #475569 100%
+          #0891b2 0%, 
+          #0284c7 50%, 
+          #00D4FA 100%
         )
       `
     : variant === 'secondary'
     ? `
         linear-gradient(145deg, 
-          rgba(55, 65, 81, 0.9) 0%, 
-          rgba(75, 85, 99, 0.85) 50%, 
-          rgba(107, 114, 128, 0.8) 100%
+          rgba(8, 145, 178, 0.9) 0%, 
+          rgba(2, 132, 199, 0.85) 50%, 
+          rgba(0, 212, 250, 0.8) 100%
         )
       `
     : variant === 'success'
@@ -729,17 +1001,17 @@ const ActionButton = styled(Button)(({ variant = 'primary', size = 'medium' }) =
       `
     : `
         linear-gradient(145deg, 
-          #6366f1 0%, 
-          #8b5cf6 50%, 
-          #a855f7 100%
+          #0891b2 0%, 
+          #0284c7 50%, 
+          #00D4FA 100%
         )
       `,
   border: variant === 'secondary'
-    ? '1px solid rgba(107, 114, 128, 0.4)'
+    ? '1px solid rgba(0, 212, 250, 0.4)'
     : variant === 'primary'
-    ? '1px solid rgba(52, 211, 153, 0.3)'
+    ? '1px solid rgba(0, 212, 250, 0.5)'
     : 'none',
-  color: variant === 'primary' ? '#34d399' : '#ffffff',
+  color: variant === 'primary' ? '#ffffff' : '#ffffff',
   padding: size === 'small'
     ? '10px 20px'
     : size === 'large'
@@ -761,16 +1033,16 @@ const ActionButton = styled(Button)(({ variant = 'primary', size = 'medium' }) =
   WebkitBackdropFilter: 'blur(10px)',
   boxShadow: variant === 'primary'
     ? `
-        0 8px 32px rgba(52, 211, 153, 0.25),
+        0 8px 32px rgba(0, 212, 250, 0.3),
         0 4px 16px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        inset 0 -1px 0 rgba(52, 211, 153, 0.1)
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        inset 0 -1px 0 rgba(0, 212, 250, 0.2)
       `
     : variant === 'secondary'
     ? `
-        0 8px 32px rgba(107, 114, 128, 0.2),
+        0 8px 32px rgba(0, 212, 250, 0.2),
         0 4px 16px rgba(0, 0, 0, 0.25),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08)
+        inset 0 1px 0 rgba(255, 255, 255, 0.1)
       `
     : variant === 'success'
     ? `
@@ -791,7 +1063,7 @@ const ActionButton = styled(Button)(({ variant = 'primary', size = 'medium' }) =
         inset 0 1px 0 rgba(255, 255, 255, 0.15)
       `
     : `
-        0 8px 32px rgba(139, 92, 246, 0.3),
+        0 8px 32px rgba(0, 212, 250, 0.3),
         0 4px 16px rgba(0, 0, 0, 0.25),
         inset 0 1px 0 rgba(255, 255, 255, 0.15)
       `,
@@ -824,17 +1096,17 @@ const ActionButton = styled(Button)(({ variant = 'primary', size = 'medium' }) =
     background: variant === 'primary'
       ? `
           linear-gradient(145deg, 
-            #334155 0%, 
-            #475569 50%, 
-            #64748b 100%
+            #0284c7 0%, 
+            #00D4FA 50%, 
+            #38bdf8 100%
           )
         `
       : variant === 'secondary'
       ? `
           linear-gradient(145deg, 
-            rgba(75, 85, 99, 0.95) 0%, 
-            rgba(107, 114, 128, 0.9) 50%, 
-            rgba(156, 163, 175, 0.85) 100%
+            rgba(2, 132, 199, 0.95) 0%, 
+            rgba(0, 212, 250, 0.9) 50%, 
+            rgba(56, 189, 248, 0.85) 100%
           )
         `
       : variant === 'success'
@@ -863,25 +1135,25 @@ const ActionButton = styled(Button)(({ variant = 'primary', size = 'medium' }) =
         `
       : `
           linear-gradient(145deg, 
-            #8b5cf6 0%, 
-            #a855f7 50%, 
-            #c084fc 100%
+            #0284c7 0%, 
+            #00D4FA 50%, 
+            #38bdf8 100%
           )
         `,
-    color: variant === 'primary' ? '#6ee7b7' : '#ffffff',
+    color: variant === 'primary' ? '#ffffff' : '#ffffff',
     textShadow: '0 4px 8px rgba(0, 0, 0, 0.6)',
     animation: `${pulseGlow} 1.5s ease-in-out infinite`,
     boxShadow: variant === 'primary'
       ? `
-          0 12px 48px rgba(52, 211, 153, 0.35),
+          0 12px 48px rgba(0, 212, 250, 0.4),
           0 6px 24px rgba(0, 0, 0, 0.4),
-          inset 0 1px 0 rgba(255, 255, 255, 0.15)
+          inset 0 1px 0 rgba(255, 255, 255, 0.2)
         `
       : variant === 'secondary'
       ? `
-          0 12px 48px rgba(107, 114, 128, 0.3),
+          0 12px 48px rgba(0, 212, 250, 0.35),
           0 6px 24px rgba(0, 0, 0, 0.35),
-          inset 0 1px 0 rgba(255, 255, 255, 0.12)
+          inset 0 1px 0 rgba(255, 255, 255, 0.15)
         `
       : variant === 'success'
       ? `
@@ -902,7 +1174,7 @@ const ActionButton = styled(Button)(({ variant = 'primary', size = 'medium' }) =
            inset 0 1px 0 rgba(255, 255, 255, 0.2)
          `
        : `
-           0 12px 48px rgba(139, 92, 246, 0.4),
+           0 12px 48px rgba(0, 212, 250, 0.4),
            0 6px 24px rgba(0, 0, 0, 0.35),
            inset 0 1px 0 rgba(255, 255, 255, 0.2)
          `,
@@ -918,12 +1190,12 @@ const ActionButton = styled(Button)(({ variant = 'primary', size = 'medium' }) =
      transform: 'translateY(-2px) scale(0.98)',
      boxShadow: variant === 'primary'
        ? `
-           0 6px 24px rgba(52, 211, 153, 0.25),
+           0 6px 24px rgba(0, 212, 250, 0.3),
            0 3px 12px rgba(0, 0, 0, 0.3)
          `
        : variant === 'secondary'
        ? `
-           0 6px 24px rgba(107, 114, 128, 0.2),
+           0 6px 24px rgba(0, 212, 250, 0.25),
            0 3px 12px rgba(0, 0, 0, 0.25)
          `
        : variant === 'success'
@@ -942,7 +1214,7 @@ const ActionButton = styled(Button)(({ variant = 'primary', size = 'medium' }) =
            0 3px 12px rgba(0, 0, 0, 0.25)
          `
        : `
-           0 6px 24px rgba(139, 92, 246, 0.3),
+           0 6px 24px rgba(0, 212, 250, 0.3),
            0 3px 12px rgba(0, 0, 0, 0.25)
          `,
    },
@@ -1443,17 +1715,20 @@ export default function Main() {
         <FieldSet legend="Create New Profile">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '24px' }}>
             <StyledTextField
+              variant="profile"
               placeholder="Username (min 2 characters)"
               value={profileForm.username}
               onChange={(e) => dispatch(updateProfileForm({ username: e.target.value }))}
             />
             <StyledTextField
+              variant="profile"
               type="password"
               placeholder="Password (min 8 characters)"
               value={profileForm.password}
               onChange={(e) => dispatch(updateProfileForm({ password: e.target.value }))}
             />
             <StyledTextField
+              variant="profile"
               type="password"
               placeholder="PIN (min 4 characters)"
               value={profileForm.pin}
@@ -1494,17 +1769,20 @@ export default function Main() {
         <FieldSet legend="Session Management">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '24px' }}>
             <StyledTextField
+              variant="session"
               placeholder="Username"
               value={sessionForm.username}
               onChange={(e) => dispatch(updateSessionForm({ username: e.target.value }))}
             />
             <StyledTextField
+              variant="session"
               type="password"
               placeholder="Password"
               value={sessionForm.password}
               onChange={(e) => dispatch(updateSessionForm({ password: e.target.value }))}
             />
             <StyledTextField
+              variant="session"
               type="password"
               placeholder="PIN"
               value={sessionForm.pin}
@@ -2446,10 +2724,20 @@ export default function Main() {
     }
   };
 
-  // Load available tokens for trading
+  // Load available tokens for trading - using Register API for network-wide discovery
   const loadAvailableTokens = async () => {
     try {
-      const tokens = await NEXUS.utilities.apiCall('finance/list/token');
+      console.log('🔍 Loading available tokens using Register API for network-wide discovery...');
+      
+      // Use Register API to get all tokens from the network, not just user-owned tokens
+      const tokens = await NEXUS.utilities.apiCall('register/list/finance:token', {
+        where: 'results.currentsupply>0', // Only active tokens with supply
+        limit: 1000, // Get a large number of tokens
+        sort: 'ticker',
+        order: 'asc'
+      });
+      
+      console.log(`✅ Found ${tokens?.length || 0} network-wide tokens via Register API`);
       setAvailableTokens(tokens || []);
       
       // Create market pairs - all tokens can be traded against NXS
@@ -2461,319 +2749,544 @@ export default function Main() {
           }
         });
       }
+      
+      console.log(`📈 Created ${markets.length} available trading markets`);
       setAvailableMarkets(markets);
     } catch (error) {
       console.error('Failed to load available tokens:', error);
       setAvailableTokens([]);
+      
+      // Fallback to Finance API for user tokens only
+      try {
+        console.log('🔄 Falling back to Finance API for user-owned tokens...');
+        const userTokens = await NEXUS.utilities.apiCall('finance/list/token');
+        setAvailableTokens(userTokens || []);
+        
+        const fallbackMarkets = ['CARBON/NXS'];
+        if (userTokens && userTokens.length > 0) {
+          userTokens.forEach(token => {
+            if (token.ticker && token.ticker !== 'NXS' && token.ticker !== 'CARBON') {
+              fallbackMarkets.push(`${token.ticker}/NXS`);
+            }
+          });
+        }
+        setAvailableMarkets(fallbackMarkets);
+      } catch (fallbackError) {
+        console.error('Fallback token loading also failed:', fallbackError);
+        setAvailableTokens([]);
+      }
     }
   };
 
-  // Comprehensive token discovery for Token Browser
+  // Enhanced token discovery using Register API with Query DSL
   const loadAllTokens = async () => {
     try {
       setTokenSearchLoading(true);
-      console.log('🔍 Starting comprehensive token discovery...');
+      console.log('🔍 Starting Register API token discovery with Query DSL...');
       
-      const discoveredTokens = new Map(); // Use Map to avoid duplicates
-      const discoveredTickers = new Set();
-      const discoveredAddresses = new Set();
+      const discoveredTokens = new Map();
+      let totalTokensFound = 0;
 
-      // Step 1: Extract token information from all market orders
-      console.log('📊 Step 1: Analyzing market orders for token discovery...');
-      try {
-        // Get all market orders with high limit to ensure we capture all active markets
-        const allMarketOrders = await NEXUS.utilities.apiCall('market/list/order', {
-          limit: 1000, // High limit to get comprehensive data
-          verbose: 'detail'
-        });
-
-        console.log('📋 Market orders found:', allMarketOrders);
-
-        // Extract tokens from market data
-        const extractTokensFromOrders = (orders) => {
-          if (!orders || !Array.isArray(orders)) return;
+      // Step 1: Use Register API to discover all finance:token objects
+      console.log('📊 Step 1: Querying register/list/finance:token with pagination...');
+      
+      let currentPage = 0;
+      let hasMoreTokens = true;
+      const pageSize = 100;
+      
+      while (hasMoreTokens && currentPage < 50) { // Limit to prevent infinite loops
+        try {
+          console.log(`📋 Fetching page ${currentPage + 1}...`);
           
-          orders.forEach(order => {
-            try {
-              // Extract from market pair (e.g., "CARBON/NXS")
-              if (order.market) {
-                const [baseToken, quoteToken] = order.market.split('/');
-                if (baseToken && baseToken !== 'NXS') {
-                  discoveredTickers.add(baseToken);
-                  console.log(`🎯 Found ticker from market pair: ${baseToken}`);
-                }
-                if (quoteToken && quoteToken !== 'NXS') {
-                  discoveredTickers.add(quoteToken);
-                  console.log(`🎯 Found ticker from market pair: ${quoteToken}`);
-                }
-              }
-
-              // Extract from contract section
-              if (order.contract) {
-                if (order.contract.token && order.contract.token !== '0') {
-                  discoveredAddresses.add(order.contract.token);
-                  console.log(`🔗 Found token address: ${order.contract.token}`);
-                }
-                if (order.contract.ticker && order.contract.ticker !== 'NXS') {
-                  discoveredTickers.add(order.contract.ticker);
-                  console.log(`🏷️ Found ticker: ${order.contract.ticker}`);
-                }
-              }
-
-              // Extract from order section
-              if (order.order) {
-                if (order.order.token && order.order.token !== '0') {
-                  discoveredAddresses.add(order.order.token);
-                  console.log(`🔗 Found token address: ${order.order.token}`);
-                }
-                if (order.order.ticker && order.order.ticker !== 'NXS') {
-                  discoveredTickers.add(order.order.ticker);
-                  console.log(`🏷️ Found ticker: ${order.order.ticker}`);
-                }
-              }
-            } catch (error) {
-              console.warn('Error processing order:', error);
-            }
+          const registerTokens = await NEXUS.utilities.apiCall('register/list/finance:token', {
+            limit: pageSize,
+            page: currentPage,
+            sort: 'modified',
+            order: 'desc',
+            where: 'results.currentsupply>0' // Only active tokens with supply
           });
-        };
 
-        // Process bids and asks
-        if (allMarketOrders.bids) {
-          extractTokensFromOrders(allMarketOrders.bids);
-        }
-        if (allMarketOrders.asks) {
-          extractTokensFromOrders(allMarketOrders.asks);
-        }
-
-        console.log(`📊 Discovered ${discoveredTickers.size} unique tickers and ${discoveredAddresses.size} unique addresses from market data`);
-      } catch (error) {
-        console.warn('Failed to extract tokens from market orders:', error);
-      }
-
-      // Step 2: Resolve discovered tickers to full token information using Finance API
-      console.log('🔍 Step 2: Resolving tickers to token addresses...');
-      for (const ticker of discoveredTickers) {
-        try {
-          console.log(`🔎 Looking up ticker: ${ticker}`);
-          const tokenInfo = await NEXUS.utilities.apiCall('finance/get/token', {
-            name: ticker
-          });
-          if (tokenInfo && tokenInfo.address) {
-            discoveredTokens.set(tokenInfo.address, {
-              ...tokenInfo,
-              source: 'market_ticker_resolution'
-            });
-            console.log(`✅ Resolved ${ticker} to address: ${tokenInfo.address}`);
+          if (!registerTokens || registerTokens.length === 0) {
+            hasMoreTokens = false;
+            break;
           }
-        } catch (error) {
-          console.log(`⚠️ Could not resolve ticker ${ticker}:`, error.message);
-        }
-      }
 
-      // Step 3: Get detailed information for discovered addresses
-      console.log('🔍 Step 3: Getting details for discovered token addresses...');
-      for (const address of discoveredAddresses) {
-        try {
-          console.log(`🔎 Getting details for address: ${address}`);
-          const tokenInfo = await NEXUS.utilities.apiCall('finance/get/token', {
-            name: address
-          });
-          if (tokenInfo) {
-            discoveredTokens.set(address, {
-              ...tokenInfo,
-              source: 'market_address_resolution'
-            });
-            console.log(`✅ Got details for token: ${tokenInfo.ticker || 'Unknown'}`);
-          }
-        } catch (error) {
-          console.log(`⚠️ Could not get details for address ${address}:`, error.message);
-        }
-      }
-
-      // Step 4: Probe for common token tickers that might exist
-      console.log('🔍 Step 4: Probing for additional tokens...');
-      const commonTickers = ['CARBON', 'GOLD', 'SILVER', 'COPPER', 'WATER', 'ENERGY', 'FOOD', 'BTC', 'ETH', 'USD', 'EUR'];
-      for (const ticker of commonTickers) {
-        if (!discoveredTickers.has(ticker)) {
-          try {
-            console.log(`🔎 Probing for ticker: ${ticker}`);
-            const tokenInfo = await NEXUS.utilities.apiCall('finance/get/token', {
-              name: ticker
-            });
-            if (tokenInfo && tokenInfo.address) {
-              discoveredTokens.set(tokenInfo.address, {
-                ...tokenInfo,
-                source: 'common_ticker_probe'
-              });
-              console.log(`✅ Found additional token: ${ticker}`);
-            }
-          } catch (error) {
-            // Expected for non-existent tokens
-          }
-        }
-      }
-
-      // Step 5: Get tokens from current user session (your own tokens)
-      console.log('🔍 Step 5: Loading session tokens...');
-      try {
-        const sessionTokens = await NEXUS.utilities.apiCall('finance/list/token', {
-          limit: 100
-        });
-        if (sessionTokens && Array.isArray(sessionTokens)) {
-          sessionTokens.forEach(token => {
+          console.log(`✅ Page ${currentPage + 1}: Found ${registerTokens.length} tokens`);
+          
+          registerTokens.forEach(token => {
             if (token.address) {
               discoveredTokens.set(token.address, {
                 ...token,
-                source: 'session_tokens'
+                source: 'register_api_pagination',
+                page: currentPage + 1
               });
-              console.log(`✅ Added session token: ${token.ticker || 'Unknown'}`);
+              totalTokensFound++;
+            }
+          });
+
+          if (registerTokens.length < pageSize) {
+            hasMoreTokens = false;
+          }
+          
+          currentPage++;
+        } catch (error) {
+          console.warn(`Failed to fetch page ${currentPage + 1}:`, error.message);
+          hasMoreTokens = false;
+        }
+      }
+
+      console.log(`📊 Register API pagination complete: ${totalTokensFound} tokens discovered`);
+
+      // Step 2: Search for tokens by specific criteria using Query DSL
+      console.log('🔍 Step 2: Using Query DSL for targeted token discovery...');
+      
+      const searchCriteria = [
+        // Search for tokens with specific tickers using wildcards
+        { where: 'results.ticker=CARBON*', name: 'carbon_variants' },
+        { where: 'results.ticker=GOLD*', name: 'gold_variants' },
+        { where: 'results.ticker=*TOKEN*', name: 'token_variants' },
+        { where: 'results.ticker=*COIN*', name: 'coin_variants' },
+        
+        // Search by supply ranges
+        { where: 'results.maxsupply>1000000', name: 'high_supply_tokens' },
+        { where: 'results.currentsupply>0 AND results.maxsupply<1000', name: 'low_supply_tokens' },
+        
+        // Search recently modified tokens
+        { where: 'results.modified>1700000000', name: 'recent_tokens' }
+      ];
+
+      for (const criteria of searchCriteria) {
+        try {
+          console.log(`🔎 Searching: ${criteria.name} with WHERE clause: ${criteria.where}`);
+          
+          const searchResults = await NEXUS.utilities.apiCall('register/list/finance:token', {
+            where: criteria.where,
+            limit: 100,
+            sort: 'ticker',
+            order: 'asc'
+          });
+
+          if (searchResults && Array.isArray(searchResults)) {
+            console.log(`✅ ${criteria.name}: Found ${searchResults.length} tokens`);
+            
+            searchResults.forEach(token => {
+              if (token.address && !discoveredTokens.has(token.address)) {
+                discoveredTokens.set(token.address, {
+                  ...token,
+                  source: `register_api_search_${criteria.name}`
+                });
+              }
+            });
+          }
+        } catch (error) {
+          console.warn(`Search failed for ${criteria.name}:`, error.message);
+        }
+      }
+
+      // Step 3: Search global names for token-related entries
+      console.log('🌐 Step 3: Searching register/list/names:global for token names...');
+      
+      try {
+        const globalNames = await NEXUS.utilities.apiCall('register/list/names:global', {
+          where: '(results.name=*token* OR results.name=*TOKEN* OR results.name=*coin* OR results.name=*COIN*)',
+          limit: 100,
+          sort: 'name',
+          order: 'asc'
+        });
+
+        if (globalNames && Array.isArray(globalNames)) {
+          console.log(`🌐 Found ${globalNames.length} global names related to tokens`);
+          
+          // Try to resolve global names to tokens
+          for (const globalName of globalNames) {
+            try {
+              if (globalName.name) {
+                const tokenInfo = await NEXUS.utilities.apiCall('register/get/finance:token', {
+                  name: globalName.name
+                });
+                
+                if (tokenInfo && tokenInfo.address && !discoveredTokens.has(tokenInfo.address)) {
+                  discoveredTokens.set(tokenInfo.address, {
+                    ...tokenInfo,
+                    source: 'global_name_resolution',
+                    globalName: globalName.name
+                  });
+                  console.log(`✅ Resolved global name ${globalName.name} to token`);
+                }
+              }
+            } catch (error) {
+              // Not all global names will resolve to tokens
+            }
+          }
+        }
+      } catch (error) {
+        console.warn('Global names search failed:', error.message);
+      }
+
+      // Step 4: Search local names for token accounts
+      console.log('📛 Step 4: Searching register/list/names:name for local token names...');
+      
+      try {
+        const localNames = await NEXUS.utilities.apiCall('register/list/names:name', {
+          where: '(results.name=*token* OR results.name=*TOKEN*)',
+          limit: 100,
+          sort: 'name',
+          order: 'asc'
+        });
+
+        if (localNames && Array.isArray(localNames)) {
+          console.log(`📛 Found ${localNames.length} local names related to tokens`);
+          
+          // Try to resolve local names to tokens
+          for (const localName of localNames) {
+            try {
+              if (localName.name) {
+                const tokenInfo = await NEXUS.utilities.apiCall('register/get/finance:token', {
+                  name: localName.name
+                });
+                
+                if (tokenInfo && tokenInfo.address && !discoveredTokens.has(tokenInfo.address)) {
+                  discoveredTokens.set(tokenInfo.address, {
+                    ...tokenInfo,
+                    source: 'local_name_resolution',
+                    localName: localName.name
+                  });
+                  console.log(`✅ Resolved local name ${localName.name} to token`);
+                }
+              }
+            } catch (error) {
+              // Not all local names will resolve to tokens
+            }
+          }
+        }
+      } catch (error) {
+        console.warn('Local names search failed:', error.message);
+      }
+
+      // Step 5: Additional Register API discovery with different criteria
+      console.log('🔍 Step 5: Additional Register API discovery with broader criteria...');
+      
+      try {
+        // Search for tokens with any supply (including zero current supply but max supply > 0)
+        const additionalTokens = await NEXUS.utilities.apiCall('register/list/finance:token', {
+          where: 'results.maxsupply>0', // Any token with maximum supply
+          limit: 500,
+          sort: 'created',
+          order: 'desc'
+        });
+        
+        if (additionalTokens && Array.isArray(additionalTokens)) {
+          console.log(`🔍 Found ${additionalTokens.length} additional tokens via broader Register API search`);
+          
+          additionalTokens.forEach(token => {
+            if (token.address && !discoveredTokens.has(token.address)) {
+              discoveredTokens.set(token.address, {
+                ...token,
+                source: 'register_api_broader_search'
+              });
             }
           });
         }
       } catch (error) {
-        console.warn('Failed to load session tokens:', error);
+        console.warn('Additional Register API discovery failed:', error.message);
       }
 
-      // Step 6: Query using finance/list/tokens with different filters to catch more tokens
-      console.log('🔍 Step 6: Comprehensive token listing...');
+      // Step 6: Discover tokens from Market API - all active trading pairs
+      console.log('💹 Step 6: Discovering tokens from Market API (all active markets)...');
+      
       try {
-        // Try to get all tokens with pagination
-        for (let page = 0; page < 10; page++) {
+        // First, try to discover all active markets by checking common trading pairs
+        const commonTokens = ['NXS', 'CARBON', 'GOLD', 'SILVER', 'BTC', 'ETH', 'USDT', 'TOKEN', 'COIN'];
+        const marketTokens = new Set();
+        
+        // Check for active markets with common base tokens
+        for (const baseToken of commonTokens) {
           try {
-            const tokens = await NEXUS.utilities.apiCall('finance/list/token', {
-              limit: 100,
-              page: page,
-              sort: 'modified',
-              order: 'desc'
+            // Try to find markets with this base token
+            const marketData = await NEXUS.utilities.apiCall('market/list/order', {
+              market: `${baseToken}/NXS`,
+              limit: 1
             });
             
-            if (!tokens || tokens.length === 0) break;
-            
-            tokens.forEach(token => {
-              if (token.address) {
-                discoveredTokens.set(token.address, {
-                  ...token,
-                  source: 'comprehensive_listing'
-                });
-              }
-            });
-            
-            console.log(`✅ Page ${page}: Found ${tokens.length} tokens`);
-            
-            if (tokens.length < 100) break; // Last page
-          } catch (error) {
-            console.log(`Page ${page} failed:`, error.message);
-            break;
-          }
-        }
-      } catch (error) {
-        console.warn('Failed comprehensive token listing:', error);
-      }
-
-      // Convert Map to Array and add market activity information
-      const tokensArray = Array.from(discoveredTokens.values());
-      
-      // Enhance tokens with market activity data
-      const enhancedTokens = await Promise.all(tokensArray.map(async (token) => {
-        try {
-          // Check for market activity
-          let marketActivity = {
-            hasMarket: false,
-            activeBids: 0,
-            activeAsks: 0,
-            lastPrice: 0,
-            volume24h: 0
-          };
-
-          if (token.ticker) {
-            try {
-              const marketPair = `${token.ticker}/NXS`;
-              const marketData = await NEXUS.utilities.apiCall('market/list/order', {
-                market: marketPair,
-                limit: 100
+            if (marketData && (marketData.bids?.length > 0 || marketData.asks?.length > 0)) {
+              marketTokens.add(baseToken);
+              console.log(`📈 Found active market: ${baseToken}/NXS`);
+              
+              // Extract token addresses from market orders
+              [...(marketData.bids || []), ...(marketData.asks || [])].forEach(order => {
+                if (order.contract?.token && order.contract?.ticker) {
+                  try {
+                    // Try to get full token info from the market order
+                    const tokenAddress = order.contract.token;
+                    const tokenTicker = order.contract.ticker;
+                    
+                    if (tokenAddress !== '0' && !discoveredTokens.has(tokenAddress)) {
+                      // Create a basic token object from market data
+                      discoveredTokens.set(tokenAddress, {
+                        address: tokenAddress,
+                        ticker: tokenTicker,
+                        source: 'market_api_discovery',
+                        marketPair: `${baseToken}/NXS`,
+                        hasActiveMarket: true
+                      });
+                      console.log(`💹 Discovered token from market: ${tokenTicker} (${tokenAddress})`);
+                    }
+                  } catch (tokenError) {
+                    // Skip invalid token data
+                  }
+                }
               });
-
-              if (marketData) {
-                marketActivity.hasMarket = true;
-                marketActivity.activeBids = marketData.bids?.length || 0;
-                marketActivity.activeAsks = marketData.asks?.length || 0;
-                
-                // Calculate basic market stats with NXS conversion
-                if (marketData.bids?.length > 0) {
-                  const prices = marketData.bids.map(bid => parseFloat(bid.price || 0) / 1000000); // Convert NXS from divisible units
-                  marketActivity.lastPrice = Math.max(...prices);
-                }
-                if (marketData.asks?.length > 0 && marketActivity.lastPrice === 0) {
-                  const prices = marketData.asks.map(ask => parseFloat(ask.price || 0) / 1000000); // Convert NXS from divisible units
-                  marketActivity.lastPrice = Math.min(...prices);
-                }
-              }
-            } catch (error) {
-              // No market activity for this token
             }
+          } catch (marketError) {
+            // No active market for this pair
           }
-
-          return {
-            ...token,
-            marketActivity,
-            // Add computed fields for display
-            totalSupply: parseFloat(token.maxsupply || 0),
-            currentSupply: parseFloat(token.currentsupply || 0),
-            decimals: parseInt(token.decimals || 0),
-            displayName: token.ticker || token.name || 'Unknown Token',
-            isActive: marketActivity.hasMarket || (token.currentsupply > 0),
-            lastModified: token.modified ? new Date(token.modified * 1000) : null
-          };
-        } catch (error) {
-          console.warn(`Error enhancing token ${token.ticker}:`, error);
-          return {
-            ...token,
-            marketActivity: { hasMarket: false, activeBids: 0, activeAsks: 0, lastPrice: 0, volume24h: 0 },
-            totalSupply: parseFloat(token.maxsupply || 0),
-            currentSupply: parseFloat(token.currentsupply || 0),
-            decimals: parseInt(token.decimals || 0),
-            displayName: token.ticker || token.name || 'Unknown Token',
-            isActive: false,
-            lastModified: token.modified ? new Date(token.modified * 1000) : null
-          };
         }
-      }));
-
-      console.log(`🎉 Token discovery complete! Found ${enhancedTokens.length} unique tokens`);
+        
+        // Also check reverse pairs (NXS as quote token)
+        for (const quoteToken of commonTokens) {
+          if (quoteToken === 'NXS') continue;
+          
+          try {
+            const marketData = await NEXUS.utilities.apiCall('market/list/order', {
+              market: `NXS/${quoteToken}`,
+              limit: 1
+            });
+            
+            if (marketData && (marketData.bids?.length > 0 || marketData.asks?.length > 0)) {
+              marketTokens.add(quoteToken);
+              console.log(`📈 Found active market: NXS/${quoteToken}`);
+              
+              // Extract token addresses from market orders
+              [...(marketData.bids || []), ...(marketData.asks || [])].forEach(order => {
+                if (order.order?.token && order.order?.ticker) {
+                  try {
+                    const tokenAddress = order.order.token;
+                    const tokenTicker = order.order.ticker;
+                    
+                    if (tokenAddress !== '0' && !discoveredTokens.has(tokenAddress)) {
+                      discoveredTokens.set(tokenAddress, {
+                        address: tokenAddress,
+                        ticker: tokenTicker,
+                        source: 'market_api_discovery',
+                        marketPair: `NXS/${quoteToken}`,
+                        hasActiveMarket: true
+                      });
+                      console.log(`💹 Discovered token from market: ${tokenTicker} (${tokenAddress})`);
+                    }
+                  } catch (tokenError) {
+                    // Skip invalid token data
+                  }
+                }
+              });
+            }
+          } catch (marketError) {
+            // No active market for this pair
+          }
+        }
+        
+        console.log(`💹 Market API discovery complete: Found ${marketTokens.size} active markets`);
+        
+        // Additional discovery: Try to find tokens from any discovered tokens as base pairs
+        console.log('🔄 Expanding market discovery with discovered tokens...');
+        const discoveredTickers = Array.from(discoveredTokens.values())
+          .map(token => token.ticker)
+          .filter(ticker => ticker && ticker !== 'NXS')
+          .slice(0, 20); // Limit to prevent too many API calls
+        
+        for (const ticker of discoveredTickers) {
+          try {
+            // Check if this token has active markets
+            const marketData = await NEXUS.utilities.apiCall('market/list/order', {
+              market: `${ticker}/NXS`,
+              limit: 1
+            });
+            
+            if (marketData && (marketData.bids?.length > 0 || marketData.asks?.length > 0)) {
+              console.log(`📈 Found additional active market: ${ticker}/NXS`);
+              
+              // Extract any additional tokens from these orders
+              [...(marketData.bids || []), ...(marketData.asks || [])].forEach(order => {
+                if (order.order?.token && order.order?.ticker) {
+                  try {
+                    const tokenAddress = order.order.token;
+                    const tokenTicker = order.order.ticker;
+                    
+                    if (tokenAddress !== '0' && !discoveredTokens.has(tokenAddress)) {
+                      discoveredTokens.set(tokenAddress, {
+                        address: tokenAddress,
+                        ticker: tokenTicker,
+                        source: 'market_api_expansion',
+                        marketPair: `${ticker}/NXS`,
+                        hasActiveMarket: true
+                      });
+                      console.log(`💹 Discovered additional token: ${tokenTicker} (${tokenAddress})`);
+                    }
+                  } catch (tokenError) {
+                    // Skip invalid token data
+                  }
+                }
+              });
+            }
+          } catch (marketError) {
+            // No active market for this pair
+          }
+        }
+        
+      } catch (error) {
+        console.warn('Market API discovery failed:', error.message);
+      }
       
-      // Sort tokens by activity (market activity first, then by supply)
-      const sortedTokens = enhancedTokens.sort((a, b) => {
+      // Step 7: Enhance discovered tokens from all sources with Register API data
+      console.log('🔍 Step 7: Enhancing market-discovered tokens with Register API data...');
+      
+      const marketDiscoveredTokens = Array.from(discoveredTokens.values())
+        .filter(token => token.source === 'market_api_discovery');
+      
+      for (const marketToken of marketDiscoveredTokens) {
+        try {
+          // Try to get full token information from Register API
+          const fullTokenInfo = await NEXUS.utilities.apiCall('register/get/finance:token', {
+            address: marketToken.address
+          });
+          
+          if (fullTokenInfo) {
+            // Update the token with full information
+            discoveredTokens.set(marketToken.address, {
+              ...fullTokenInfo,
+              source: 'market_api_enhanced',
+              marketPair: marketToken.marketPair,
+              hasActiveMarket: true
+            });
+            console.log(`🔍 Enhanced market token: ${fullTokenInfo.ticker || marketToken.ticker}`);
+          }
+        } catch (error) {
+          // Keep the basic market token info if Register API fails
+          console.warn(`Could not enhance market token ${marketToken.ticker}:`, error.message);
+        }
+      }
+      
+      // Convert Map to Array and enhance with market data
+      const tokensArray = Array.from(discoveredTokens.values());
+      console.log(`🎯 Total unique tokens discovered: ${tokensArray.length}`);
+
+      // Step 8: Enhance tokens with market activity data using parallel processing
+      console.log('📈 Step 8: Enhancing tokens with market activity data...');
+      
+      const enhancedTokens = await Promise.allSettled(
+        tokensArray.map(async (token) => {
+          try {
+            let marketActivity = {
+              hasMarket: false,
+              activeBids: 0,
+              activeAsks: 0,
+              lastPrice: 0,
+              volume24h: 0
+            };
+
+            if (token.ticker && token.ticker !== 'NXS') {
+              try {
+                const marketPair = `${token.ticker}/NXS`;
+                const marketData = await NEXUS.utilities.apiCall('market/list/order', {
+                  market: marketPair,
+                  limit: 10 // Reduced for performance
+                });
+
+                if (marketData && (marketData.bids?.length > 0 || marketData.asks?.length > 0)) {
+                  marketActivity.hasMarket = true;
+                  marketActivity.activeBids = marketData.bids?.length || 0;
+                  marketActivity.activeAsks = marketData.asks?.length || 0;
+                  
+                  // Calculate basic market stats
+                  if (marketData.bids?.length > 0) {
+                    const prices = marketData.bids.map(bid => parseFloat(bid.price || 0));
+                    marketActivity.lastPrice = Math.max(...prices);
+                  }
+                  if (marketData.asks?.length > 0 && marketActivity.lastPrice === 0) {
+                    const prices = marketData.asks.map(ask => parseFloat(ask.price || 0));
+                    marketActivity.lastPrice = Math.min(...prices);
+                  }
+                }
+              } catch (marketError) {
+                // No market activity for this token
+              }
+            }
+
+            return {
+              ...token,
+              marketActivity,
+              totalSupply: parseFloat(token.maxsupply || 0),
+              currentSupply: parseFloat(token.currentsupply || 0),
+              decimals: parseInt(token.decimals || 0),
+              displayName: token.ticker || token.name || 'Unknown Token',
+              isActive: marketActivity.hasMarket || (parseFloat(token.currentsupply || 0) > 0),
+              lastModified: token.modified ? new Date(token.modified * 1000) : null,
+              // Add search metadata
+              searchable: {
+                ticker: (token.ticker || '').toLowerCase(),
+                name: (token.name || '').toLowerCase(),
+                address: (token.address || '').toLowerCase(),
+                globalName: (token.globalName || '').toLowerCase(),
+                localName: (token.localName || '').toLowerCase()
+              }
+            };
+          } catch (error) {
+            console.warn(`Error enhancing token ${token.ticker}:`, error);
+            return null;
+          }
+        })
+      );
+
+      // Filter successful results
+      const validTokens = enhancedTokens
+        .filter(result => result.status === 'fulfilled' && result.value !== null)
+        .map(result => result.value);
+
+      console.log(`✅ Successfully enhanced ${validTokens.length} tokens`);
+
+      // Sort tokens by relevance and activity
+      const sortedTokens = validTokens.sort((a, b) => {
         // Active markets first
         if (a.marketActivity.hasMarket !== b.marketActivity.hasMarket) {
           return b.marketActivity.hasMarket ? 1 : -1;
         }
-        // Then by total market activity
+        // Then by market activity
         const aActivity = a.marketActivity.activeBids + a.marketActivity.activeAsks;
         const bActivity = b.marketActivity.activeBids + b.marketActivity.activeAsks;
         if (aActivity !== bActivity) {
           return bActivity - aActivity;
         }
-        // Then by supply
-        return b.currentSupply - a.currentSupply;
+        // Then by current supply
+        const aSupply = a.currentSupply || 0;
+        const bSupply = b.currentSupply || 0;
+        if (aSupply !== bSupply) {
+          return bSupply - aSupply;
+        }
+        // Finally by ticker alphabetically
+        const aTicker = a.ticker || '';
+        const bTicker = b.ticker || '';
+        return aTicker.localeCompare(bTicker);
       });
 
       setAllTokens(sortedTokens);
       setFilteredTokens(sortedTokens);
       
-      console.log(`📊 Tokens by source:`, {
-        market_ticker: sortedTokens.filter(t => t.source === 'market_ticker_resolution').length,
-        market_address: sortedTokens.filter(t => t.source === 'market_address_resolution').length,
-        session: sortedTokens.filter(t => t.source === 'session_tokens').length,
-        probe: sortedTokens.filter(t => t.source === 'common_ticker_probe').length,
-        comprehensive: sortedTokens.filter(t => t.source === 'comprehensive_listing').length,
+      // Log discovery statistics
+      const sourceStats = {};
+      sortedTokens.forEach(token => {
+        const source = token.source || 'unknown';
+        sourceStats[source] = (sourceStats[source] || 0) + 1;
       });
+      
+      console.log(`📊 Token discovery complete! Sources:`, sourceStats);
+      console.log(`🎉 Total tokens loaded: ${sortedTokens.length}`);
 
       return sortedTokens;
+      
     } catch (error) {
-      console.error('Failed to load all tokens:', error);
+      console.error('Register API token discovery failed:', error);
       NEXUS.utilities.showErrorDialog({
-        message: 'Token Discovery Failed',
-        note: error?.message || 'Could not discover all available tokens',
+        message: 'Register API Token Discovery Failed',
+        note: error?.message || 'Could not discover tokens using Register API',
       });
       return [];
     } finally {
@@ -2930,58 +3443,515 @@ export default function Main() {
     };
   }, [marketData, selectedMarket]);
 
-  // Filter and sort tokens for Token Browser
-  const filterAndSortTokens = () => {
-    let filtered = allTokens;
+  // Enhanced filtering with Register API real-time search
+  const filterAndSortTokens = async () => {
+    try {
+      let filtered = [...allTokens];
 
-    // Apply text filter
-    if (tokenFilter) {
-      const filterLower = tokenFilter.toLowerCase();
-      filtered = filtered.filter(token =>
+      // Enhanced Register API search with comprehensive capabilities
+      if (tokenFilter && tokenFilter.length >= 1) {
+        const searchTerm = tokenFilter.trim();
+        
+        // Advanced pattern detection
+        const isAddress = /^8[A-Za-z0-9]{50,}$/.test(searchTerm);
+        const isPartialAddress = /^8[A-Za-z0-9]{10,49}$/.test(searchTerm);
+        const isGlobalName = searchTerm.includes('::');
+        const isLocalName = searchTerm.includes(':') && !isGlobalName;
+        const isNumeric = /^\d+(\.\d+)?$/.test(searchTerm);
+        const isHex = /^[0-9a-fA-F]+$/.test(searchTerm) && searchTerm.length >= 8;
+
+        console.log(`🔍 Enhanced Register API Search: "${searchTerm}"`);
+        console.log(`📊 Pattern Analysis: Address=${isAddress}, PartialAddr=${isPartialAddress}, Global=${isGlobalName}, Local=${isLocalName}, Numeric=${isNumeric}, Hex=${isHex}`);
+
+        try {
+          // 1. Direct address lookup (exact match)
+          if (isAddress) {
+            console.log(`🎯 Direct address lookup: ${searchTerm}`);
+            const directToken = await NEXUS.utilities.apiCall('register/get/finance:token', {
+              address: searchTerm
+            });
+            
+            if (directToken && directToken.address) {
+              const existingToken = filtered.find(t => t.address === directToken.address);
+              if (!existingToken) {
+                const enhancedToken = await enhanceTokenData(directToken, 'direct_address_lookup');
+                filtered.unshift(enhancedToken);
+                console.log(`✅ Found token by direct address: ${directToken.ticker}`);
+              }
+            }
+          }
+          
+          // 2. Partial address search using filtering
+          else if (isPartialAddress) {
+            console.log(`🔍 Partial address search: ${searchTerm}*`);
+            const partialResults = await NEXUS.utilities.apiCall('register/list/finance:token', {
+              where: `results.address=${searchTerm}*`,
+              limit: 50,
+              sort: 'ticker',
+              order: 'asc'
+            });
+            
+            if (partialResults && Array.isArray(partialResults)) {
+              console.log(`✅ Partial address search: Found ${partialResults.length} tokens`);
+              for (const token of partialResults) {
+                const existingToken = filtered.find(t => t.address === token.address);
+                if (!existingToken && token.address) {
+                  const enhancedToken = await enhanceTokenData(token, 'partial_address_search');
+                  filtered.push(enhancedToken);
+                }
+              }
+            }
+          }
+          
+          // 3. Name-based lookup (global and local names)
+          else if (isGlobalName || isLocalName) {
+            console.log(`🌐 Name-based lookup: ${searchTerm}`);
+            const nameToken = await NEXUS.utilities.apiCall('register/get/finance:token', {
+              name: searchTerm
+            });
+            
+            if (nameToken && nameToken.address) {
+              const existingToken = filtered.find(t => t.address === nameToken.address);
+              if (!existingToken) {
+                const enhancedToken = await enhanceTokenData(nameToken, 'direct_name_lookup');
+                enhancedToken.searchable.globalName = isGlobalName ? searchTerm.toLowerCase() : '';
+                enhancedToken.searchable.localName = isLocalName ? searchTerm.toLowerCase() : '';
+                filtered.unshift(enhancedToken);
+                console.log(`✅ Found token by name: ${nameToken.ticker}`);
+              }
+            }
+            
+            // Also search for partial name matches
+            const nameSearches = [
+              { where: `results.name=*${searchTerm}*`, type: 'name_contains' },
+              { where: `results.name=${searchTerm}*`, type: 'name_prefix' }
+            ];
+            
+            for (const search of nameSearches) {
+              try {
+                const nameResults = await NEXUS.utilities.apiCall('register/list/finance:token', {
+                  where: search.where,
+                  limit: 30,
+                  sort: 'ticker',
+                  order: 'asc'
+                });
+                
+                if (nameResults && Array.isArray(nameResults)) {
+                  console.log(`✅ ${search.type}: Found ${nameResults.length} tokens`);
+                  for (const token of nameResults) {
+                    const existingToken = filtered.find(t => t.address === token.address);
+                    if (!existingToken && token.address) {
+                      const enhancedToken = await enhanceTokenData(token, `name_search_${search.type}`);
+                      filtered.push(enhancedToken);
+                    }
+                  }
+                }
+              } catch (error) {
+                console.log(`${search.type} search failed:`, error.message);
+              }
+            }
+          }
+          
+          // 4. Comprehensive wildcard and pattern searches
+          else {
+            console.log(`🔎 Comprehensive search patterns for: ${searchTerm}`);
+            
+            const searchPatterns = [
+              // Exact matches (highest priority)
+              { where: `results.ticker=${searchTerm.toUpperCase()}`, name: 'exact_ticker', priority: 1 },
+              { where: `results.name=${searchTerm}`, name: 'exact_name', priority: 1 },
+              
+              // Prefix matches (high priority)
+              { where: `results.ticker=${searchTerm.toUpperCase()}*`, name: 'prefix_ticker', priority: 2 },
+              { where: `results.name=${searchTerm}*`, name: 'prefix_name', priority: 2 },
+              
+              // Contains matches (medium priority)
+              { where: `results.ticker=*${searchTerm.toUpperCase()}*`, name: 'contains_ticker', priority: 3 },
+              { where: `results.name=*${searchTerm}*`, name: 'contains_name', priority: 3 },
+              
+              // Case-insensitive variations
+              { where: `results.ticker=*${searchTerm.toLowerCase()}*`, name: 'contains_ticker_lower', priority: 4 },
+              { where: `results.name=*${searchTerm.toLowerCase()}*`, name: 'contains_name_lower', priority: 4 }
+            ];
+            
+            // Add numeric-specific searches if applicable
+            if (isNumeric) {
+              const numValue = parseFloat(searchTerm);
+              searchPatterns.push(
+                { where: `results.currentsupply=${numValue}`, name: 'exact_supply', priority: 2 },
+                { where: `results.maxsupply=${numValue}`, name: 'exact_max_supply', priority: 2 },
+                { where: `results.decimals=${parseInt(searchTerm)}`, name: 'exact_decimals', priority: 2 }
+              );
+            }
+            
+            // Sort patterns by priority
+            searchPatterns.sort((a, b) => a.priority - b.priority);
+            
+            for (const pattern of searchPatterns) {
+              try {
+                console.log(`🔍 Trying ${pattern.name}: ${pattern.where}`);
+                
+                const searchResults = await NEXUS.utilities.apiCall('register/list/finance:token', {
+                  where: pattern.where,
+                  limit: pattern.priority === 1 ? 10 : (pattern.priority === 2 ? 25 : 50),
+                  sort: tokenSortBy === 'ticker' ? 'ticker' : (tokenSortBy === 'modified' ? 'modified' : 'ticker'),
+                  order: tokenSortOrder || 'asc'
+                });
+
+                if (searchResults && Array.isArray(searchResults) && searchResults.length > 0) {
+                  console.log(`✅ ${pattern.name}: Found ${searchResults.length} tokens`);
+                  
+                  for (const searchToken of searchResults) {
+                    const existingToken = filtered.find(t => t.address === searchToken.address);
+                    if (!existingToken && searchToken.address) {
+                      const enhancedToken = await enhanceTokenData(searchToken, `pattern_search_${pattern.name}`);
+                      enhancedToken.searchPriority = pattern.priority;
+                      filtered.push(enhancedToken);
+                    }
+                  }
+                  
+                  // For exact matches, break early to prioritize results
+                  if (pattern.priority === 1 && searchResults.length > 0) {
+                    console.log(`🎯 Exact match found, prioritizing results`);
+                    break;
+                  }
+                }
+              } catch (searchError) {
+                console.log(`Search failed for ${pattern.name}:`, searchError.message);
+              }
+            }
+          }
+          
+          // 5. Advanced name resolution searches
+          if (searchTerm.length >= 3) {
+            console.log(`🌐 Advanced name resolution search`);
+            
+            try {
+              // Search global names
+              const globalNameResults = await NEXUS.utilities.apiCall('register/list/names:global', {
+                where: `results.name=*${searchTerm}*`,
+                limit: 20
+              });
+              
+              if (globalNameResults && Array.isArray(globalNameResults)) {
+                console.log(`🌍 Found ${globalNameResults.length} global names matching search`);
+                
+                for (const nameEntry of globalNameResults) {
+                  if (nameEntry.name && (nameEntry.name.toLowerCase().includes('token') || 
+                      nameEntry.name.toLowerCase().includes(searchTerm.toLowerCase()))) {
+                    try {
+                      const resolvedToken = await NEXUS.utilities.apiCall('register/get/finance:token', {
+                        name: nameEntry.name
+                      });
+                      
+                      if (resolvedToken && resolvedToken.address) {
+                        const existingToken = filtered.find(t => t.address === resolvedToken.address);
+                        if (!existingToken) {
+                          const enhancedToken = await enhanceTokenData(resolvedToken, 'global_name_resolution');
+                          enhancedToken.searchable.globalName = nameEntry.name.toLowerCase();
+                          filtered.push(enhancedToken);
+                          console.log(`✅ Resolved global name ${nameEntry.name} to token ${resolvedToken.ticker}`);
+                        }
+                      }
+                    } catch (resolveError) {
+                      // Silent fail for name resolution
+                    }
+                  }
+                }
+              }
+              
+              // Search local names
+              const localNameResults = await NEXUS.utilities.apiCall('register/list/names:name', {
+                where: `results.name=*${searchTerm}*`,
+                limit: 20
+              });
+              
+              if (localNameResults && Array.isArray(localNameResults)) {
+                console.log(`🏠 Found ${localNameResults.length} local names matching search`);
+                
+                for (const nameEntry of localNameResults) {
+                  if (nameEntry.name && (nameEntry.name.toLowerCase().includes('token') || 
+                      nameEntry.name.toLowerCase().includes(searchTerm.toLowerCase()))) {
+                    try {
+                      const resolvedToken = await NEXUS.utilities.apiCall('register/get/finance:token', {
+                        name: nameEntry.name
+                      });
+                      
+                      if (resolvedToken && resolvedToken.address) {
+                        const existingToken = filtered.find(t => t.address === resolvedToken.address);
+                        if (!existingToken) {
+                          const enhancedToken = await enhanceTokenData(resolvedToken, 'local_name_resolution');
+                          enhancedToken.searchable.localName = nameEntry.name.toLowerCase();
+                          filtered.push(enhancedToken);
+                          console.log(`✅ Resolved local name ${nameEntry.name} to token ${resolvedToken.ticker}`);
+                        }
+                      }
+                    } catch (resolveError) {
+                      // Silent fail for name resolution
+                    }
+                  }
+                }
+              }
+            } catch (nameSearchError) {
+              console.log('Name resolution search failed:', nameSearchError.message);
+            }
+          }
+          
+        } catch (searchError) {
+          console.warn('Enhanced Register API search failed, using local filter:', searchError.message);
+        }
+      }
+
+      // Apply enhanced local text filter as fallback or enhancement
+      if (tokenFilter) {
+        const filterLower = tokenFilter.toLowerCase();
+        filtered = filtered.filter(token => {
+          if (!token.searchable) {
+            // Fallback for tokens without searchable metadata
+            return (
+              (token.ticker && token.ticker.toLowerCase().includes(filterLower)) ||
+              (token.name && token.name.toLowerCase().includes(filterLower)) ||
+              (token.address && token.address.toLowerCase().includes(filterLower))
+            );
+          }
+          
+          return (
+            token.searchable.ticker.includes(filterLower) ||
+            token.searchable.name.includes(filterLower) ||
+            token.searchable.address.includes(filterLower) ||
+            token.searchable.globalName.includes(filterLower) ||
+            token.searchable.localName.includes(filterLower)
+          );
+        });
+      }
+
+      // Remove duplicates by address and enhance with search scoring
+      const uniqueFiltered = filtered.filter((token, index, self) => 
+        index === self.findIndex(t => t.address === token.address)
+      );
+
+      // Calculate search relevance scores for better ranking
+      if (tokenFilter && tokenFilter.length >= 1) {
+        const searchLower = tokenFilter.toLowerCase();
+        uniqueFiltered.forEach(token => {
+          let relevanceScore = 0;
+          
+          // Exact matches get highest score
+          if (token.searchable?.ticker === searchLower) relevanceScore += 100;
+          if (token.searchable?.name === searchLower) relevanceScore += 90;
+          if (token.searchable?.address === searchLower) relevanceScore += 95;
+          
+          // Prefix matches get high score
+          if (token.searchable?.ticker.startsWith(searchLower)) relevanceScore += 80;
+          if (token.searchable?.name.startsWith(searchLower)) relevanceScore += 70;
+          
+          // Contains matches get medium score
+          if (token.searchable?.ticker.includes(searchLower)) relevanceScore += 60;
+          if (token.searchable?.name.includes(searchLower)) relevanceScore += 50;
+          if (token.searchable?.address.includes(searchLower)) relevanceScore += 40;
+          
+          // Name resolution matches get bonus
+          if (token.searchable?.globalName.includes(searchLower)) relevanceScore += 30;
+          if (token.searchable?.localName.includes(searchLower)) relevanceScore += 25;
+          
+          // Search priority bonus (from pattern matching)
+          if (token.searchPriority) {
+            relevanceScore += (6 - token.searchPriority) * 10; // Higher priority = lower number = higher score
+          }
+          
+          // Market activity bonus
+          if (token.marketActivity?.hasMarket) relevanceScore += 10;
+          if (token.marketActivity?.activeBids > 0) relevanceScore += 5;
+          if (token.marketActivity?.activeAsks > 0) relevanceScore += 5;
+          
+          token.relevanceScore = relevanceScore;
+        });
+      }
+
+      // Enhanced sorting with multiple criteria
+      uniqueFiltered.sort((a, b) => {
+        // If we have a search filter, prioritize relevance first
+        if (tokenFilter && tokenFilter.length >= 1) {
+          const relevanceDiff = (b.relevanceScore || 0) - (a.relevanceScore || 0);
+          if (relevanceDiff !== 0) return relevanceDiff;
+        }
+        
+        let aVal, bVal;
+        
+        switch (tokenSortBy) {
+          case 'ticker':
+            aVal = (a.ticker || '').toLowerCase();
+            bVal = (b.ticker || '').toLowerCase();
+            break;
+          case 'name':
+            aVal = (a.name || a.ticker || '').toLowerCase();
+            bVal = (b.name || b.ticker || '').toLowerCase();
+            break;
+          case 'supply':
+            aVal = a.currentSupply || 0;
+            bVal = b.currentSupply || 0;
+            break;
+          case 'marketActivity':
+            aVal = (a.marketActivity?.activeBids || 0) + (a.marketActivity?.activeAsks || 0);
+            bVal = (b.marketActivity?.activeBids || 0) + (b.marketActivity?.activeAsks || 0);
+            break;
+          case 'lastPrice':
+            aVal = a.marketActivity?.lastPrice || 0;
+            bVal = b.marketActivity?.lastPrice || 0;
+            break;
+          case 'modified':
+            aVal = a.modified || 0;
+            bVal = b.modified || 0;
+            break;
+          case 'relevance':
+            aVal = a.relevanceScore || 0;
+            bVal = b.relevanceScore || 0;
+            break;
+          default:
+            aVal = (a.ticker || '').toLowerCase();
+            bVal = (b.ticker || '').toLowerCase();
+        }
+
+        if (tokenSortOrder === 'asc') {
+          return aVal < bVal ? -1 : aVal > bVal ? 1 : 0;
+        } else {
+          return aVal > bVal ? -1 : aVal < bVal ? 1 : 0;
+        }
+      });
+
+      // Apply advanced result prioritization
+      if (tokenFilter && tokenFilter.length >= 1) {
+        const directResults = uniqueFiltered.filter(token => 
+          token.source && (
+            token.source.includes('direct_') || 
+            token.source.includes('exact_')
+          )
+        );
+        const patternResults = uniqueFiltered.filter(token => 
+          token.source && (
+            token.source.includes('pattern_search_') ||
+            token.source.includes('wildcard_') ||
+            token.source.includes('name_search_')
+          )
+        );
+        const nameResolutionResults = uniqueFiltered.filter(token => 
+          token.source && token.source.includes('_name_resolution')
+        );
+        const otherResults = uniqueFiltered.filter(token => 
+          !token.source || (
+            !token.source.includes('direct_') && 
+            !token.source.includes('exact_') &&
+            !token.source.includes('pattern_search_') &&
+            !token.source.includes('wildcard_') &&
+            !token.source.includes('name_search_') &&
+            !token.source.includes('_name_resolution')
+          )
+        );
+        
+        // Combine results with priority: direct > pattern > name resolution > others
+        const prioritizedResults = [
+          ...directResults,
+          ...patternResults,
+          ...nameResolutionResults,
+          ...otherResults
+        ];
+        
+        setFilteredTokens(prioritizedResults);
+        console.log(`🎯 Search Results Summary: Direct=${directResults.length}, Pattern=${patternResults.length}, NameRes=${nameResolutionResults.length}, Other=${otherResults.length}, Total=${prioritizedResults.length}`);
+      } else {
+        setFilteredTokens(uniqueFiltered);
+      }
+      
+      setTokenPage(0); // Reset to first page when filtering
+      
+    } catch (error) {
+      console.error('Token filtering failed:', error);
+      // Fallback to basic local filtering
+      let filtered = allTokens;
+      if (tokenFilter) {
+        const filterLower = tokenFilter.toLowerCase();
+        filtered = filtered.filter(token =>
           (token.ticker && token.ticker.toLowerCase().includes(filterLower)) ||
           (token.address && token.address.toLowerCase().includes(filterLower))
         );
+      }
+      setFilteredTokens(filtered);
+      setTokenPage(0);
     }
+  };
 
-    // Apply sorting
-    filtered.sort((a, b) => {
-      let aVal, bVal;
+  // Helper function to enhance token data with consistent structure
+  const enhanceTokenData = async (tokenData, source) => {
+    try {
+      // Get market activity data if available
+      let marketActivity = { hasMarket: false, activeBids: 0, activeAsks: 0, lastPrice: 0, volume24h: 0 };
       
-      switch (tokenSortBy) {
-        case 'ticker':
-          aVal = (a.ticker || '').toLowerCase();
-          bVal = (b.ticker || '').toLowerCase();
-          break;
-        case 'supply':
-          aVal = a.currentSupply || 0;
-          bVal = b.currentSupply || 0;
-          break;
-        case 'marketActivity':
-          aVal = (a.marketActivity?.activeBids || 0) + (a.marketActivity?.activeAsks || 0);
-          bVal = (b.marketActivity?.activeBids || 0) + (b.marketActivity?.activeAsks || 0);
-          break;
-        case 'lastPrice':
-          aVal = a.marketActivity?.lastPrice || 0;
-          bVal = b.marketActivity?.lastPrice || 0;
-          break;
-        case 'modified':
-          aVal = a.modified || 0;
-          bVal = b.modified || 0;
-          break;
-        default:
-          aVal = (a.ticker || '').toLowerCase();
-          bVal = (b.ticker || '').toLowerCase();
+      if (tokenData.ticker) {
+        try {
+          const marketData = await NEXUS.utilities.apiCall('market/list/order', {
+            where: `results.market=${tokenData.ticker}/NXS`,
+            limit: 100
+          });
+          
+          if (marketData && Array.isArray(marketData)) {
+            const activeBids = marketData.filter(order => order.type === 'bid').length;
+            const activeAsks = marketData.filter(order => order.type === 'ask').length;
+            const lastPrice = marketData.length > 0 ? (marketData[0].price || 0) : 0;
+            
+            marketActivity = {
+              hasMarket: marketData.length > 0,
+              activeBids,
+              activeAsks,
+              lastPrice,
+              volume24h: 0 // Could be calculated from recent orders
+            };
+          }
+        } catch (marketError) {
+          // Silent fail for market data
+        }
       }
-
-      if (tokenSortOrder === 'asc') {
-        return aVal < bVal ? -1 : aVal > bVal ? 1 : 0;
-      } else {
-        return aVal > bVal ? -1 : aVal < bVal ? 1 : 0;
-      }
-    });
-
-    setFilteredTokens(filtered);
-    setTokenPage(0); // Reset to first page when filtering
+      
+      return {
+        ...tokenData,
+        source,
+        marketActivity,
+        totalSupply: parseFloat(tokenData.maxsupply || 0),
+        currentSupply: parseFloat(tokenData.currentsupply || 0),
+        decimals: parseInt(tokenData.decimals || 0),
+        displayName: tokenData.ticker || tokenData.name || 'Unknown Token',
+        isActive: parseFloat(tokenData.currentsupply || 0) > 0,
+        lastModified: tokenData.modified ? new Date(tokenData.modified * 1000) : null,
+        searchable: {
+          ticker: (tokenData.ticker || '').toLowerCase(),
+          name: (tokenData.name || '').toLowerCase(),
+          address: (tokenData.address || '').toLowerCase(),
+          globalName: '',
+          localName: ''
+        },
+        searchPriority: 5 // Default priority
+      };
+    } catch (error) {
+      console.error('Error enhancing token data:', error);
+      return {
+        ...tokenData,
+        source,
+        marketActivity: { hasMarket: false, activeBids: 0, activeAsks: 0, lastPrice: 0, volume24h: 0 },
+        totalSupply: parseFloat(tokenData.maxsupply || 0),
+        currentSupply: parseFloat(tokenData.currentsupply || 0),
+        decimals: parseInt(tokenData.decimals || 0),
+        displayName: tokenData.ticker || tokenData.name || 'Unknown Token',
+        isActive: parseFloat(tokenData.currentsupply || 0) > 0,
+        lastModified: tokenData.modified ? new Date(tokenData.modified * 1000) : null,
+        searchable: {
+          ticker: (tokenData.ticker || '').toLowerCase(),
+          name: (tokenData.name || '').toLowerCase(),
+          address: (tokenData.address || '').toLowerCase(),
+          globalName: '',
+          localName: ''
+        },
+        searchPriority: 5
+      };
+    }
   };
 
   // Effect to re-filter when filter criteria change
@@ -3488,16 +4458,14 @@ export default function Main() {
                 Discover More Tokens
               </label>
               <ActionButton
-                variant="secondary"
+                variant="primary"
                 onClick={() => dispatch(setActiveTab('tokenbrowser'))}
                 style={{
-                  background: 'linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%)',
-                  color: '#ffffff',
-                  border: 'none',
-                  borderRadius: '8px',
-                  padding: '12px 16px',
-                  fontWeight: '500',
-                  width: '100%'
+                  width: '100%',
+                  borderRadius: '12px',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)'
                 }}
               >
                 🔍 Browse All Tokens
@@ -3507,49 +4475,43 @@ export default function Main() {
               <label style={{ color: '#8892b0', marginBottom: '8px', display: 'block', fontSize: '14px', fontWeight: '500' }}>
                 Market Actions
               </label>
-              <Button
+              <ActionButton
                 variant="secondary"
                 onClick={refreshMarketData}
                 disabled={loading}
                 style={{
-                  background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)',
-                  color: '#ffffff',
-                  border: 'none',
-                  borderRadius: '8px',
-                  padding: '12px 16px',
-                  fontWeight: '500',
-                  transition: 'all 0.2s ease',
-                  cursor: 'pointer',
                   width: '100%',
-                  marginBottom: '8px'
+                  marginBottom: '8px',
+                  borderRadius: '12px',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)'
                 }}
               >
                 {loading ? 'Refreshing...' : '🔄 Refresh Market'}
-              </Button>
+              </ActionButton>
             </div>
             <div>
               <label style={{ color: '#8892b0', marginBottom: '8px', display: 'block', fontSize: '14px', fontWeight: '500' }}>
                 Auto-Refresh
               </label>
-              <Button
-                variant="secondary"
+              <ActionButton
+                variant={autoRefresh ? 'success' : 'secondary'}
                 onClick={() => setAutoRefresh(!autoRefresh)}
                 style={{
+                  width: '100%',
+                  borderRadius: '12px',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
                   background: autoRefresh 
                     ? 'linear-gradient(135deg, #059669 0%, #10b981 100%)' 
-                    : 'linear-gradient(135deg, #1f2937 0%, #374151 100%)',
-                  color: '#ffffff',
-                  border: autoRefresh ? 'none' : '1px solid #4b5563',
-                  borderRadius: '8px',
-                  padding: '12px 16px',
-                  fontWeight: '500',
-                  transition: 'all 0.2s ease',
-                  cursor: 'pointer',
-                  width: '100%'
+                    : 'linear-gradient(135deg, #0891b2 0%, #0284c7 100%)',
+                  border: autoRefresh ? 'none' : '1px solid rgba(0, 212, 250, 0.3)'
                 }}
               >
                 {autoRefresh ? '⏸️ Auto-Refresh ON' : '▶️ Auto-Refresh OFF'}
-              </Button>
+              </ActionButton>
             </div>
           </div>
 
@@ -3607,20 +4569,24 @@ export default function Main() {
                       style={{
                         background: orderForm.type === 'bid' 
                           ? 'linear-gradient(135deg, #4ade80 0%, #059669 100%)' 
-                          : 'linear-gradient(135deg, #1f2937 0%, #111827 100%)',
-                        border: orderForm.type === 'bid' ? '2px solid #4ade80' : '1px solid #374151',
+                          : 'linear-gradient(135deg, #0891b2 0%, #0284c7 100%)',
+                        border: orderForm.type === 'bid' ? '2px solid #4ade80' : '1px solid rgba(0, 212, 250, 0.4)',
                         color: '#ffffff',
                         padding: '16px',
-                        borderRadius: '12px',
+                        borderRadius: '16px',
                         cursor: 'pointer',
                         fontSize: '14px',
                         fontWeight: '600',
                         textAlign: 'center',
-                        transition: 'all 0.3s ease'
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
+                        boxShadow: orderForm.type === 'bid' 
+                          ? '0 8px 32px rgba(74, 222, 128, 0.3), 0 4px 16px rgba(0, 0, 0, 0.2)'
+                          : '0 8px 32px rgba(0, 212, 250, 0.25), 0 4px 16px rgba(0, 0, 0, 0.2)'
                       }}
                     >
                       🟢 BUY ORDER (Bid)
-                      <div style={{ fontSize: '12px', marginTop: '4px', opacity: 0.8 }}>
+                      <div style={{ fontSize: '12px', marginTop: '4px', opacity: 0.9 }}>
                         Buy {baseToken} with {quoteToken}
                       </div>
                     </button>
@@ -3629,20 +4595,24 @@ export default function Main() {
                       style={{
                         background: orderForm.type === 'ask' 
                           ? 'linear-gradient(135deg, #f87171 0%, #dc2626 100%)' 
-                          : 'linear-gradient(135deg, #1f2937 0%, #111827 100%)',
-                        border: orderForm.type === 'ask' ? '2px solid #f87171' : '1px solid #374151',
+                          : 'linear-gradient(135deg, #0891b2 0%, #0284c7 100%)',
+                        border: orderForm.type === 'ask' ? '2px solid #f87171' : '1px solid rgba(0, 212, 250, 0.4)',
                         color: '#ffffff',
                         padding: '16px',
-                        borderRadius: '12px',
+                        borderRadius: '16px',
                         cursor: 'pointer',
                         fontSize: '14px',
                         fontWeight: '600',
                         textAlign: 'center',
-                        transition: 'all 0.3s ease'
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
+                        boxShadow: orderForm.type === 'ask' 
+                          ? '0 8px 32px rgba(248, 113, 113, 0.3), 0 4px 16px rgba(0, 0, 0, 0.2)'
+                          : '0 8px 32px rgba(0, 212, 250, 0.25), 0 4px 16px rgba(0, 0, 0, 0.2)'
                       }}
                     >
                       🔴 SELL ORDER (Ask)
-                      <div style={{ fontSize: '12px', marginTop: '4px', opacity: 0.8 }}>
+                      <div style={{ fontSize: '12px', marginTop: '4px', opacity: 0.9 }}>
                         Sell {baseToken} for {quoteToken}
                       </div>
                     </button>
@@ -3715,11 +4685,13 @@ export default function Main() {
                 return (
                   <>
                     <StyledTextField
+                      variant="default"
                       placeholder={`Amount of ${baseToken} tokens to ${orderForm.type === 'bid' ? 'buy' : 'sell'}`}
                       value={orderForm.amount}
                       onChange={(e) => setOrderForm({ ...orderForm, amount: e.target.value })}
                     />
                     <StyledTextField
+                      variant="default"
                       placeholder={`Price (${quoteToken} per ${baseToken})`}
                       value={orderForm.price}
                       onChange={(e) => setOrderForm({ ...orderForm, price: e.target.value })}
@@ -3765,6 +4737,7 @@ export default function Main() {
                   const [baseToken, quoteToken] = selectedMarket.split('/');
                   return (
                     <StyledTextField
+                      variant="default"
                       placeholder={orderForm.type === 'bid' 
                         ? `${quoteToken} account name/address` 
                         : `${baseToken} token account name/address`
@@ -3803,8 +4776,8 @@ export default function Main() {
                         {walletData.accounts
                           ?.filter(account => {
                             if (orderForm.type === 'bid') {
-                              // For buy orders, user pays with quote token (NXS)
-                              return !account.ticker || account.ticker === quoteToken || account.ticker === 'NXS';
+                              // For buy orders, user pays with quote token
+                              return account.ticker === quoteToken;
                             } else {
                               // For sell orders, user pays with base token
                               return account.ticker === baseToken;
@@ -3863,6 +4836,7 @@ export default function Main() {
                   const [baseToken, quoteToken] = selectedMarket.split('/');
                   return (
                     <StyledTextField
+                      variant="default"
                       placeholder={orderForm.type === 'bid' 
                         ? `${baseToken} token account name/address` 
                         : `${quoteToken} account name/address`
@@ -3904,8 +4878,8 @@ export default function Main() {
                               // For buy orders, user receives base token
                               return account.ticker === baseToken;
                             } else {
-                              // For sell orders, user receives quote token (NXS)
-                              return !account.ticker || account.ticker === quoteToken || account.ticker === 'NXS';
+                              // For sell orders, user receives quote token
+                              return account.ticker === quoteToken;
                             }
                           })
                           ?.map((account, idx) => (
@@ -6599,6 +7573,7 @@ export default function Main() {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '12px', marginBottom: '12px' }}>
                   <div>
                     <StyledTextField
+                      variant="wallet"
                       placeholder="From Account (name or address)"
                       value={accountTransferForm.from}
                       onChange={(e) => setAccountTransferForm(prev => ({ ...prev, from: e.target.value }))}
@@ -6627,12 +7602,14 @@ export default function Main() {
                   </div>
 
                   <StyledTextField
+                    variant="wallet"
                     placeholder="To Account (name or address)"
                     value={accountTransferForm.to}
                     onChange={(e) => setAccountTransferForm(prev => ({ ...prev, to: e.target.value }))}
                   />
 
                   <StyledTextField
+                    variant="wallet"
                     type="number"
                     step="any"
                     placeholder="Amount"
@@ -6643,11 +7620,13 @@ export default function Main() {
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '12px', marginBottom: '12px' }}>
                   <StyledTextField
+                    variant="wallet"
                     placeholder="Reference (optional integer)"
                     value={accountTransferForm.reference}
                     onChange={(e) => setAccountTransferForm(prev => ({ ...prev, reference: e.target.value }))}
                   />
                   <StyledTextField
+                    variant="wallet"
                     placeholder="Expires (seconds, 0 = never, default = 604800)"
                     value={accountTransferForm.expires}
                     onChange={(e) => setAccountTransferForm(prev => ({ ...prev, expires: e.target.value }))}
@@ -6671,6 +7650,7 @@ export default function Main() {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '12px', marginBottom: '12px' }}>
                   <div>
                     <StyledTextField
+                      variant="tokens"
                       placeholder="Token Address (register address)"
                       value={tokenTransferForm.tokenAddress}
                       onChange={(e) => setTokenTransferForm(prev => ({ ...prev, tokenAddress: e.target.value }))}
@@ -6699,12 +7679,14 @@ export default function Main() {
                   </div>
 
                   <StyledTextField
+                    variant="tokens"
                     placeholder="To Account (recipient account name or address)"
                     value={tokenTransferForm.to}
                     onChange={(e) => setTokenTransferForm(prev => ({ ...prev, to: e.target.value }))}
                   />
 
                   <StyledTextField
+                    variant="tokens"
                     type="number"
                     step="any"
                     placeholder="Amount"
@@ -6715,11 +7697,13 @@ export default function Main() {
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '12px', marginBottom: '12px' }}>
                   <StyledTextField
+                    variant="tokens"
                     placeholder="Reference (optional integer)"
                     value={tokenTransferForm.reference}
                     onChange={(e) => setTokenTransferForm(prev => ({ ...prev, reference: e.target.value }))}
                   />
                   <StyledTextField
+                    variant="tokens"
                     placeholder="Expires (seconds, 0 = never, default = 604800)"
                     value={tokenTransferForm.expires}
                     onChange={(e) => setTokenTransferForm(prev => ({ ...prev, expires: e.target.value }))}
@@ -6743,6 +7727,7 @@ export default function Main() {
                 </div>
 
                 <StyledTextField
+                  variant="transactions"
                   placeholder="Transaction ID (txid) for token transaction"
                   value={creditForm.txid}
                   onChange={(e) => setCreditForm(prev => ({ ...prev, txid: e.target.value }))}
@@ -6760,6 +7745,7 @@ export default function Main() {
                 </div>
 
                 <StyledTextField
+                  variant="transactions"
                   placeholder="Transaction ID (txid) for NXS transaction"
                   value={creditForm.txid}
                   onChange={(e) => setCreditForm(prev => ({ ...prev, txid: e.target.value }))}
@@ -6783,6 +7769,7 @@ export default function Main() {
               }}>
                 <div style={{ flex: '1', minWidth: '250px' }}>
                   <StyledTextField
+                    variant="transactions"
                     placeholder="Account name to load transactions"
                     value={selectedAccount}
                     onChange={(e) => setSelectedAccount(e.target.value)}
@@ -6864,11 +7851,13 @@ export default function Main() {
                 <h3 style={{ color: '#06b6d4' }}>📁 Create New Account</h3>
                 <FieldSet legend="Create a new token account">
                   <StyledTextField
+                    variant="accounts"
                     placeholder="Account Name"
                     value={accountForm.name}
                     onChange={(e) => setAccountForm(prev => ({ ...prev, name: e.target.value }))}
                   />
                   <StyledTextField
+                    variant="accounts"
                     placeholder="Token (address, ticker, or 'NXS')"
                     value={accountForm.token}
                     onChange={(e) => setAccountForm(prev => ({ ...prev, token: e.target.value }))}
@@ -6884,6 +7873,7 @@ export default function Main() {
                 <h3 style={{ color: '#8b5cf6' }}>📊 Account Management</h3>
                 <FieldSet legend="Get account information">
                   <StyledTextField
+                    variant="accounts"
                     placeholder="Account name for details/history"
                     value={selectedAccount}
                     onChange={(e) => setSelectedAccount(e.target.value)}
@@ -6969,11 +7959,13 @@ export default function Main() {
                 <h3 style={{ color: '#8b5cf6' }}>🪙 Create New Token</h3>
                 <FieldSet legend="Create a new token">
                   <StyledTextField
+                    variant="tokens"
                     placeholder="Token Name"
                     value={tokenForm.name}
                     onChange={(e) => setTokenForm(prev => ({ ...prev, name: e.target.value }))}
                   />
                   <StyledTextField
+                    variant="tokens"
                     type="number"
                     placeholder="Total Supply"
                     value={tokenForm.supply}
@@ -6984,6 +7976,7 @@ export default function Main() {
                       Token Decimals (0-18, default: 2)
                     </label>
                     <StyledTextField
+                      variant="tokens"
                       type="number"
                       placeholder="2"
                       value={tokenForm.decimals}
@@ -7006,17 +7999,20 @@ export default function Main() {
                 <h3 style={{ color: '#ef4444' }}>🔥 Burn Tokens</h3>
                 <FieldSet legend="Permanently remove tokens from circulation">
                   <StyledTextField
+                    variant="tokens"
                     placeholder="Account Name or Address"
                     value={burnForm.account}
                     onChange={(e) => setBurnForm(prev => ({ ...prev, account: e.target.value }))}
                   />
                   <StyledTextField
+                    variant="tokens"
                     type="number"
                     placeholder="Amount to Burn"
                     value={burnForm.amount}
                     onChange={(e) => setBurnForm(prev => ({ ...prev, amount: e.target.value }))}
                   />
                   <StyledTextField
+                    variant="tokens"
                     placeholder="Reference (optional)"
                     value={burnForm.reference}
                     onChange={(e) => setBurnForm(prev => ({ ...prev, reference: e.target.value }))}
@@ -7075,12 +8071,14 @@ export default function Main() {
                 <h3 style={{ color: '#f59e0b' }}>🥩 Manage Stake</h3>
                 <FieldSet legend="Set staking amount">
                   <StyledTextField
+                    variant="staking"
                     type="number"
                     placeholder="New Stake Amount (total stake, not additional)"
                     value={stakeForm.amount}
                     onChange={(e) => setStakeForm(prev => ({ ...prev, amount: e.target.value }))}
                   />
                   <StyledTextField
+                    variant="staking"
                     type="number"
                     placeholder="Expires (seconds, 0 = never)"
                     value={stakeForm.expires}
@@ -7157,6 +8155,7 @@ export default function Main() {
                 <h3 style={{ color: '#ef4444' }}>❌ Void Transaction</h3>
                 <FieldSet legend="Reverse unclaimed debit transactions">
                   <StyledTextField
+                    variant="advanced"
                     placeholder="Transaction ID to void"
                     value={voidForm.txid}
                     onChange={(e) => setVoidForm(prev => ({ ...prev, txid: e.target.value }))}
@@ -7286,7 +8285,12 @@ export default function Main() {
             gap: '10px'
           }}>
             <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-              <div style={{ color: '#a78bfa', fontWeight: '700', fontSize: '14px' }}>
+              <div style={{ 
+                color: '#00D4FA', 
+                fontWeight: '700', 
+                fontSize: '14px',
+                textShadow: '0 0 8px rgba(0, 212, 250, 0.3)'
+              }}>
                 📊 {sortedSimplifiedTokens.length} Available Tokens
               </div>
               <div style={{ color: '#94a3b8', fontSize: '12px', fontWeight: '500' }}>
@@ -7303,18 +8307,19 @@ export default function Main() {
                   setSimplifiedPage(0);
                 }}
                 style={{
-                  background: '#1f2937',
-                  border: '1px solid rgba(139, 92, 246, 0.3)',
+                  background: 'linear-gradient(135deg, #1f2937 0%, #0f172a 100%)',
+                  border: '1px solid rgba(0, 212, 250, 0.4)',
                   color: '#e5e7eb',
                   padding: '6px 8px',
-                  borderRadius: '4px',
-                  fontSize: '12px'
+                  borderRadius: '6px',
+                  fontSize: '12px',
+                  boxShadow: '0 2px 8px rgba(0, 212, 250, 0.1)'
                 }}
               >
-                <option value={5}>5 per page</option>
-                <option value={10}>10 per page</option>
-                <option value={20}>20 per page</option>
-                <option value={50}>50 per page</option>
+                <option style={{ background: '#1f2937', color: '#00D4FA' }} value={5}>5 per page</option>
+                <option style={{ background: '#1f2937', color: '#00D4FA' }} value={10}>10 per page</option>
+                <option style={{ background: '#1f2937', color: '#00D4FA' }} value={20}>20 per page</option>
+                <option style={{ background: '#1f2937', color: '#00D4FA' }} value={50}>50 per page</option>
               </select>
               
               {/* Sort selector */}
@@ -7322,18 +8327,19 @@ export default function Main() {
                 value={simplifiedSortBy}
                 onChange={(e) => setSimplifiedSortBy(e.target.value)}
                 style={{
-                  background: '#1f2937',
-                  border: '1px solid rgba(139, 92, 246, 0.3)',
+                  background: 'linear-gradient(135deg, #1f2937 0%, #0f172a 100%)',
+                  border: '1px solid rgba(0, 212, 250, 0.4)',
                   color: '#e5e7eb',
                   padding: '6px 8px',
-                  borderRadius: '4px',
-                  fontSize: '12px'
+                  borderRadius: '6px',
+                  fontSize: '12px',
+                  boxShadow: '0 2px 8px rgba(0, 212, 250, 0.1)'
                 }}
               >
-                <option value="ticker">Sort by Ticker</option>
-                <option value="name">Sort by Name</option>
-                <option value="supply">Sort by Supply</option>
-                <option value="modified">Sort by Modified</option>
+                <option style={{ background: '#1f2937', color: '#00D4FA' }} value="ticker">Sort by Ticker</option>
+                <option style={{ background: '#1f2937', color: '#00D4FA' }} value="name">Sort by Name</option>
+                <option style={{ background: '#1f2937', color: '#00D4FA' }} value="supply">Sort by Supply</option>
+                <option style={{ background: '#1f2937', color: '#00D4FA' }} value="modified">Sort by Modified</option>
               </select>
             </div>
           </div>
@@ -7351,12 +8357,14 @@ export default function Main() {
               style={{
                 width: '100%',
                 padding: '10px 12px',
-                background: '#1f2937',
-                border: '1px solid rgba(139, 92, 246, 0.3)',
-                borderRadius: '6px',
+                background: 'linear-gradient(135deg, #1f2937 0%, #0f172a 100%)',
+                border: '2px solid rgba(0, 212, 250, 0.3)',
+                borderRadius: '8px',
                 color: '#e5e7eb',
                 fontSize: '14px',
-                outline: 'none'
+                outline: 'none',
+                boxShadow: '0 4px 12px rgba(0, 212, 250, 0.1)',
+                transition: 'all 0.3s ease'
               }}
             />
           </div>
@@ -7378,12 +8386,14 @@ export default function Main() {
                 display: 'grid',
                 gridTemplateColumns: '40px 1fr 200px 150px 120px',
                 padding: '10px 12px',
-                background: 'rgba(139, 92, 246, 0.1)',
-                borderRadius: '4px',
+                background: 'linear-gradient(135deg, rgba(0, 212, 250, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%)',
+                borderRadius: '8px',
                 fontSize: '12px',
                 fontWeight: '600',
-                color: '#8b5cf6',
-                gap: '12px'
+                color: '#00D4FA',
+                gap: '12px',
+                border: '1px solid rgba(0, 212, 250, 0.2)',
+                textShadow: '0 0 4px rgba(0, 212, 250, 0.3)'
               }}>
                 <div>Select</div>
                 <div>Token</div>
@@ -7405,11 +8415,11 @@ export default function Main() {
                       gridTemplateColumns: '40px 1fr 200px 150px 120px',
                       padding: '12px',
                       background: isSelected 
-                        ? 'rgba(139, 92, 246, 0.15)'
-                        : 'rgba(31, 41, 55, 0.8)',
-                      borderRadius: '6px',
+                        ? 'linear-gradient(135deg, rgba(0, 212, 250, 0.2) 0%, rgba(59, 130, 246, 0.15) 100%)'
+                        : 'linear-gradient(135deg, rgba(31, 41, 55, 0.9) 0%, rgba(15, 23, 42, 0.8) 100%)',
+                      borderRadius: '8px',
                       border: isSelected
-                        ? '2px solid rgba(139, 92, 246, 0.5)'
+                        ? '2px solid rgba(0, 212, 250, 0.6)'
                         : '1px solid rgba(75, 85, 99, 0.3)',
                       transition: 'all 0.2s ease',
                       gap: '12px',
@@ -7417,14 +8427,16 @@ export default function Main() {
                     }}
                     onMouseEnter={(e) => {
                       if (!isSelected) {
-                        e.currentTarget.style.background = 'rgba(31, 41, 55, 1)';
-                        e.currentTarget.style.borderColor = 'rgba(139, 92, 246, 0.4)';
+                        e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0, 212, 250, 0.1) 0%, rgba(31, 41, 55, 1) 100%)';
+                        e.currentTarget.style.borderColor = 'rgba(0, 212, 250, 0.5)';
+                        e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 212, 250, 0.2)';
                       }
                     }}
                     onMouseLeave={(e) => {
                       if (!isSelected) {
-                        e.currentTarget.style.background = 'rgba(31, 41, 55, 0.8)';
+                        e.currentTarget.style.background = 'linear-gradient(135deg, rgba(31, 41, 55, 0.9) 0%, rgba(15, 23, 42, 0.8) 100%)';
                         e.currentTarget.style.borderColor = 'rgba(75, 85, 99, 0.3)';
+                        e.currentTarget.style.boxShadow = 'none';
                       }
                     }}
                   >
@@ -7438,7 +8450,7 @@ export default function Main() {
                         style={{
                           width: '16px',
                           height: '16px',
-                          accentColor: '#8b5cf6',
+                          accentColor: '#00D4FA',
                           cursor: token.ticker ? 'pointer' : 'not-allowed'
                         }}
                       />
@@ -7535,7 +8547,7 @@ export default function Main() {
                                 minWidth: '80px',
                                 fontSize: '10px',
                                 padding: '4px 6px',
-                                background: 'linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%)',
+                                background: 'linear-gradient(135deg, #00D4FA 0%, #0ea5e9 100%)',
                                 color: '#ffffff',
                                 border: 'none'
                               }}
@@ -7595,7 +8607,12 @@ export default function Main() {
                   ← Prev
                 </ActionButton>
                 
-                <span style={{ color: '#8b5cf6', fontSize: '12px', fontWeight: '600' }}>
+                <span style={{ 
+                  color: '#00D4FA', 
+                  fontSize: '12px', 
+                  fontWeight: '600',
+                  textShadow: '0 0 4px rgba(0, 212, 250, 0.4)'
+                }}>
                   {simplifiedPage + 1} / {totalPages}
                 </span>
                 
@@ -7654,11 +8671,11 @@ export default function Main() {
                   gridTemplateColumns: '1fr 120px 100px 80px',
                   padding: '12px',
                   background: isActive 
-                    ? 'rgba(139, 92, 246, 0.2)' 
-                    : 'rgba(31, 41, 55, 0.8)',
-                  borderRadius: '6px',
+                    ? 'linear-gradient(135deg, rgba(0, 212, 250, 0.25) 0%, rgba(59, 130, 246, 0.2) 100%)' 
+                    : 'linear-gradient(135deg, rgba(31, 41, 55, 0.9) 0%, rgba(15, 23, 42, 0.8) 100%)',
+                  borderRadius: '8px',
                   border: isActive 
-                    ? '2px solid rgba(139, 92, 246, 0.6)'
+                    ? '2px solid rgba(0, 212, 250, 0.7)'
                     : '1px solid rgba(75, 85, 99, 0.3)',
                   gap: '12px',
                   alignItems: 'center',
@@ -7669,7 +8686,7 @@ export default function Main() {
                 <div>
                   <div style={{
                     fontWeight: '700',
-                    color: isActive ? '#a78bfa' : '#f1f5f9',
+                    color: isActive ? '#00D4FA' : '#f1f5f9',
                     fontSize: '14px',
                     marginBottom: '4px'
                   }}>
@@ -8013,6 +9030,7 @@ export default function Main() {
           marginBottom: '20px'
         }}>
           <StyledTextField
+            variant="tokens"
             placeholder="Search by ticker, name, or address..."
             value={tokenFilter}
             onChange={(e) => setTokenFilter(e.target.value)}
@@ -8026,17 +9044,19 @@ export default function Main() {
                 flex: 1,
                 padding: '12px',
                 borderRadius: '8px',
-                border: '1px solid rgba(139, 92, 246, 0.3)',
-                background: 'linear-gradient(135deg, #1a202c 0%, #2d3748 100%)',
-                color: '#8b5cf6',
-                fontSize: '14px'
+                border: '1px solid rgba(0, 212, 250, 0.4)',
+                background: 'linear-gradient(135deg, #1f2937 0%, #0f172a 100%)',
+                color: '#00D4FA',
+                fontSize: '14px',
+                boxShadow: '0 2px 8px rgba(0, 212, 250, 0.1)'
               }}
             >
-              <option value="ticker">Sort by Ticker</option>
-              <option value="supply">Sort by Supply</option>
-              <option value="marketActivity">Sort by Market Activity</option>
-              <option value="lastPrice">Sort by Last Price</option>
-              <option value="modified">Sort by Last Modified</option>
+                <option style={{ background: '#1f2937', color: '#00D4FA' }} value="relevance">Sort by Relevance</option>
+                <option style={{ background: '#1f2937', color: '#00D4FA' }} value="ticker">Sort by Ticker</option>
+                <option style={{ background: '#1f2937', color: '#00D4FA' }} value="supply">Sort by Supply</option>
+                <option style={{ background: '#1f2937', color: '#00D4FA' }} value="marketActivity">Sort by Market Activity</option>
+                <option style={{ background: '#1f2937', color: '#00D4FA' }} value="lastPrice">Sort by Last Price</option>
+                <option style={{ background: '#1f2937', color: '#00D4FA' }} value="modified">Sort by Last Modified</option>
             </select>
             
             <button
@@ -8044,12 +9064,13 @@ export default function Main() {
               style={{
                 padding: '12px 16px',
                 borderRadius: '8px',
-                border: '1px solid rgba(139, 92, 246, 0.3)',
-                background: 'linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%)',
+                border: '1px solid rgba(0, 212, 250, 0.4)',
+                background: 'linear-gradient(135deg, #00D4FA 0%, #0891b2 100%)',
                 color: '#ffffff',
                 cursor: 'pointer',
                 fontSize: '14px',
-                fontWeight: '500'
+                fontWeight: '500',
+                boxShadow: '0 2px 8px rgba(0, 212, 250, 0.2)'
               }}
             >
               {tokenSortOrder === 'asc' ? '⬆️ ASC' : '⬇️ DESC'}
@@ -8558,6 +9579,7 @@ export default function Main() {
               marginBottom: '16px' 
             }}>
               <StyledTextField
+                variant="tokens"
                 placeholder="Search by ticker, name, or address..."
                 value={tokenFilter}
                 onChange={(e) => setTokenFilter(e.target.value)}
@@ -8571,17 +9593,19 @@ export default function Main() {
                     flex: 1,
                     padding: '12px',
                     borderRadius: '8px',
-                    border: '1px solid rgba(139, 92, 246, 0.3)',
-                    background: 'linear-gradient(135deg, #1a202c 0%, #2d3748 100%)',
-                    color: '#8b5cf6',
-                    fontSize: '14px'
+                    border: '1px solid rgba(0, 212, 250, 0.4)',
+                    background: 'linear-gradient(135deg, #1f2937 0%, #0f172a 100%)',
+                    color: '#00D4FA',
+                    fontSize: '14px',
+                    boxShadow: '0 2px 8px rgba(0, 212, 250, 0.1)'
                   }}
                 >
-                  <option value="ticker">Sort by Ticker</option>
-                  <option value="supply">Sort by Supply</option>
-                  <option value="marketActivity">Sort by Market Activity</option>
-                  <option value="lastPrice">Sort by Last Price</option>
-                  <option value="modified">Sort by Last Modified</option>
+                  <option style={{ background: '#1f2937', color: '#00D4FA' }} value="relevance">Sort by Relevance</option>
+                  <option style={{ background: '#1f2937', color: '#00D4FA' }} value="ticker">Sort by Ticker</option>
+                  <option style={{ background: '#1f2937', color: '#00D4FA' }} value="supply">Sort by Supply</option>
+                  <option style={{ background: '#1f2937', color: '#00D4FA' }} value="marketActivity">Sort by Market Activity</option>
+                  <option style={{ background: '#1f2937', color: '#00D4FA' }} value="lastPrice">Sort by Last Price</option>
+                  <option style={{ background: '#1f2937', color: '#00D4FA' }} value="modified">Sort by Last Modified</option>
                 </select>
                 
                 <button
@@ -8589,12 +9613,13 @@ export default function Main() {
                   style={{
                     padding: '12px 16px',
                     borderRadius: '8px',
-                    border: '1px solid rgba(139, 92, 246, 0.3)',
-                    background: 'linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%)',
+                    border: '1px solid rgba(0, 212, 250, 0.4)',
+                    background: 'linear-gradient(135deg, #00D4FA 0%, #0891b2 100%)',
                     color: '#ffffff',
                     cursor: 'pointer',
                     fontSize: '14px',
-                    fontWeight: '500'
+                    fontWeight: '500',
+                    boxShadow: '0 2px 8px rgba(0, 212, 250, 0.2)'
                   }}
                 >
                   {tokenSortOrder === 'asc' ? '⬆️ ASC' : '⬇️ DESC'}
@@ -8894,17 +9919,18 @@ export default function Main() {
                           style={{
                             padding: '6px 12px',
                             borderRadius: '6px',
-                            border: '1px solid rgba(139, 92, 246, 0.3)',
-                            background: '#1a202c',
-                            color: '#8b5cf6',
-                            fontSize: '12px'
+                            border: '1px solid rgba(0, 212, 250, 0.4)',
+                            background: 'linear-gradient(135deg, #1f2937 0%, #0f172a 100%)',
+                            color: '#00D4FA',
+                            fontSize: '12px',
+                            boxShadow: '0 2px 8px rgba(0, 212, 250, 0.1)'
                           }}
                         >
-                          <option value={6}>6 per page</option>
-                          <option value={12}>12 per page</option>
-                          <option value={24}>24 per page</option>
-                          <option value={48}>48 per page</option>
-                          <option value={100}>100 per page</option>
+                          <option style={{ background: '#1f2937', color: '#00D4FA' }} value={6}>6 per page</option>
+                          <option style={{ background: '#1f2937', color: '#00D4FA' }} value={12}>12 per page</option>
+                          <option style={{ background: '#1f2937', color: '#00D4FA' }} value={24}>24 per page</option>
+                          <option style={{ background: '#1f2937', color: '#00D4FA' }} value={48}>48 per page</option>
+                          <option style={{ background: '#1f2937', color: '#00D4FA' }} value={100}>100 per page</option>
                         </select>
                       </div>
 

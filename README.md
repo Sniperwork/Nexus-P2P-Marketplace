@@ -78,7 +78,11 @@ The Nexus P2P Marketplace is a comprehensive trading module for Nexus Wallet wit
 - Token/Token Pairs : Trade any token against any other token (e.g., CARBON/GOLD)
 - Enhanced Token Discovery : Automatic discovery of user tokens
 - Comprehensive Pair Generation : Creates all possible trading combinations
-- Smart Account Matching : Automatic account detection based on token tickers
+- **Smart Account Matching** : Automatic account detection based on token tickers
+- **Fixed Account Filtering** : Corrected dropdown logic to show only relevant token accounts
+  - Buy orders: Payment dropdown shows quote token accounts, receiving dropdown shows base token accounts
+  - Sell orders: Payment dropdown shows base token accounts, receiving dropdown shows quote token accounts
+  - Eliminated incorrect NXS account display in token-specific dropdowns
 ### Trading Pair Validation
 - Account Availability Checks : Validates required accounts exist
 - Balance Verification : Ensures sufficient balances for trading
@@ -105,6 +109,19 @@ The Nexus P2P Marketplace is a comprehensive trading module for Nexus Wallet wit
 - Status Indicators : Clear visual feedback for all actions
 - Shimmer Effects : Smooth loading animations
 - Gradient Backgrounds : Modern card-based interface design
+- **Enhanced StyledTextField Components** : 10 distinct styling variants with unique themes:
+  - `default` : Standard dark theme with subtle gradients
+  - `premium` : Luxurious gold and purple gradient styling
+  - `accent` : Vibrant cyan and purple accent colors
+  - `wallet` : Green-themed styling for wallet operations
+  - `transactions` : Blue-themed styling for transaction forms
+  - `accounts` : Purple-themed styling for account management
+  - `tokens` : Orange-themed styling for token operations
+  - `staking` : Teal-themed styling for staking features
+  - `advanced` : Red-themed styling for advanced operations
+  - `profile` : Pink-themed styling for profile management
+  - `session` : Indigo-themed styling for session controls
+- **Consistent Visual Identity** : Each variant includes matching gradients, borders, focus states, and smooth transitions
 ## 📊 Data Management
 - Real-time Market Data : Live updates of prices and volumes
 - Transaction Tracking : Complete audit trail of all operations
@@ -144,7 +161,7 @@ This marketplace represents a complete trading ecosystem within the Nexus Wallet
    ```bash
    npm run dev
    ```
-   Access at `http://localhost:5000`
+   Access at `http://localhost:5002`
 
 4. **Build for production**
    ```bash
@@ -197,6 +214,23 @@ The module integrates with various Nexus APIs:
 - **Market API**: Trading pair and market data
 - **Finance API**: Transaction and balance information
 - **Supply API**: Token supply and distribution data
+
+## 📋 Recent Updates
+
+### Version 1.1.0 (Latest)
+- **Enhanced UI Components**: Added 10 distinct StyledTextField variants with unique color themes
+- **Fixed Account Filtering**: Corrected cross-token trading account dropdown logic
+  - Eliminated incorrect NXS account display in token-specific dropdowns
+  - Improved account selection accuracy for CARBON/GOLD, GOLD/SILVER pairs
+- **Visual Consistency**: Applied themed styling across all form components
+- **Development Server**: Updated to run on port 5002
+
+### Version 1.1.0
+- **Cross-Token Trading**: Implemented Token/Token trading pairs beyond Token/NXS
+- **Enhanced Token Discovery**: Automatic discovery of user tokens in multi-user environments
+- **Improved Account Detection**: Smart account matching based on token tickers
+- **Better UI Organization**: Grouped trading pairs with enhanced visual feedback
+- **Comprehensive Logging**: Added debugging and monitoring capabilities
 
 ## 🤝 Contributing
 
