@@ -1874,7 +1874,7 @@ export default function Main() {
   // Simplified Token Listing state
   const [simplifiedPage, setSimplifiedPage] = useState(0);
   const [simplifiedPerPage, setSimplifiedPerPage] = useState(10);
-  const [simplifiedFilter, setSimplifiedFilter] = useState('');
+  // Removed separate simplifiedFilter - now using shared tokenFilter for consistency
   const [simplifiedSortBy, setSimplifiedSortBy] = useState('ticker');
   
   // Trading pair selection state for Token Browser
@@ -8471,15 +8471,9 @@ export default function Main() {
   // Token Browser rendering
   // Render Simplified Token Listing
   const renderSimplifiedTokenListing = () => {
-    // Filter tokens for simplified listing
-    const filteredSimplifiedTokens = allTokens.filter(token => {
-      if (!simplifiedFilter) return true;
-      const searchTerm = simplifiedFilter.toLowerCase();
-      return (
-          token.ticker?.toLowerCase().includes(searchTerm) ||
-          token.address?.toLowerCase().includes(searchTerm)
-        );
-    });
+    // Use the same filtered tokens as Comprehensive Token Listing for consistency
+    // This ensures both components show the same search results
+    const filteredSimplifiedTokens = filteredTokens;
 
     // Sort tokens
     const sortedSimplifiedTokens = [...filteredSimplifiedTokens].sort((a, b) => {
@@ -8515,7 +8509,7 @@ export default function Main() {
     const totalPages = Math.ceil(sortedSimplifiedTokens.length / simplifiedPerPage);
 
     return (
-      <FieldSet legend="📋 Quick Token Browser - Trading Ready">
+      <FieldSet legend={`📋 Quick Token Browser - Trading Ready (${filteredSimplifiedTokens.length} tokens found)`}>
         <div style={{ marginBottom: '20px' }}>
           {/* Header with stats and controls */}
           <div style={{
@@ -8533,7 +8527,7 @@ export default function Main() {
                 fontSize: '14px',
                 textShadow: '0 0 8px rgba(0, 212, 250, 0.3)'
               }}>
-                📊 {sortedSimplifiedTokens.length} Available Tokens
+                📊 {filteredSimplifiedTokens.length} Available Tokens {tokenFilter ? `(filtered from ${allTokens.length})` : ''}
               </div>
               <div style={{ color: '#94a3b8', fontSize: '12px', fontWeight: '500' }}>
                 Page {simplifiedPage + 1} of {Math.max(1, totalPages)}
@@ -8591,10 +8585,11 @@ export default function Main() {
             <input
               type="text"
               placeholder="🔍 Search tokens by ticker, name, or address..."
-              value={simplifiedFilter}
+              value={tokenFilter}
               onChange={(e) => {
-                setSimplifiedFilter(e.target.value);
+                setTokenFilter(e.target.value);
                 setSimplifiedPage(0);
+                // Filtering is automatically triggered by useEffect when tokenFilter changes
               }}
               style={{
                 width: '100%',
@@ -8646,7 +8641,7 @@ export default function Main() {
               
               {/* Token rows */}
               {paginatedTokens.map((token, index) => {
-                const hasMarketActivity = token.marketActivity?.hasMarket || availableMarkets.includes(`${token.ticker}/NXS`);
+                const hasMarketActivity = availableMarkets.includes(`${token.ticker}/NXS`);
                 const isSelected = selectedTokensForPairs.find(t => t.ticker === token.ticker);
                 
                 return (
@@ -8903,10 +8898,7 @@ export default function Main() {
         <div style={{ display: 'grid', gap: '8px' }}>
           {selectedTradingPairs.map((pairData, index) => {
             const isActive = activeTradingPair === pairData.pair;
-            // Check market activity from token data or fallback to availableMarkets
-            const baseToken = pairData.pair.split('/')[0];
-            const tokenData = allTokens.find(t => t.ticker === baseToken);
-            const hasMarketActivity = tokenData?.marketActivity?.hasMarket || availableMarkets.includes(pairData.pair);
+            const hasMarketActivity = availableMarkets.includes(pairData.pair);
             
             return (
               <div
