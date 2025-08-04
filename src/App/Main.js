@@ -1899,10 +1899,21 @@ export default function Main() {
     const validation = validateCrossTokenTradingPair(selectedMarket);
     
     if (!validation.isValid) {
-      NEXUS.utilities.showErrorDialog({
-        message: 'Trading Pair Validation Failed',
-        note: `Missing accounts for: ${validation.missingAccounts.join(', ')}\n\nPlease create accounts for these tokens in the Wallet tab first.`,
+      // Show confirmation dialog first
+      const userConfirmed = await NEXUS.utilities.confirm({
+        question: `You don't have the required token accounts for this trading pair. Do you want to proceed anyway?`,
+        note: `Missing accounts for: ${validation.missingAccounts.join(', ')}`,
+        labelYes: 'Proceed Anyway',
+        labelNo: 'Cancel'
       });
+      
+      if (userConfirmed) {
+        // User confirmed, show the validation error message
+        NEXUS.utilities.showErrorDialog({
+          message: 'Trading Pair Validation Failed',
+          note: `Missing accounts for: ${validation.missingAccounts.join(', ')}\n\nPlease create accounts for these tokens in the Wallet tab first.`,
+        });
+      }
       return;
     }
 
@@ -2728,9 +2739,11 @@ export default function Main() {
   const loadAvailableTokens = async () => {
     try {
       console.log('🔍 Loading available tokens using Register API for network-wide discovery...');
+      const sessionParams = getSessionParams();
       
       // Use Register API to get all tokens from the network, not just user-owned tokens
       const tokens = await NEXUS.utilities.apiCall('register/list/finance:token', {
+        ...sessionParams,
         where: 'results.currentsupply>0', // Only active tokens with supply
         limit: 1000, // Get a large number of tokens
         sort: 'ticker',
@@ -2759,7 +2772,7 @@ export default function Main() {
       // Fallback to Finance API for user tokens only
       try {
         console.log('🔄 Falling back to Finance API for user-owned tokens...');
-        const userTokens = await NEXUS.utilities.apiCall('finance/list/token');
+        const userTokens = await NEXUS.utilities.apiCall('finance/list/token', sessionParams);
         setAvailableTokens(userTokens || []);
         
         const fallbackMarkets = ['CARBON/NXS'];
@@ -2778,6 +2791,24 @@ export default function Main() {
     }
   };
 
+  // Helper function to get current session parameters for multi-user mode
+  const getSessionParams = () => {
+    const sessionParams = {};
+    
+    // Check if we have an active session (multi-user mode)
+    if (sessionStatus?.session) {
+      sessionParams.session = sessionStatus.session;
+      console.log('🔐 Using session ID for multi-user mode:', sessionStatus.session);
+    } else if (userStatus?.session) {
+      sessionParams.session = userStatus.session;
+      console.log('🔐 Using session ID from userStatus:', userStatus.session);
+    } else {
+      console.log('🔓 No session ID found - using single-user mode');
+    }
+    
+    return sessionParams;
+  };
+
   // Enhanced token discovery using Register API with Query DSL
   const loadAllTokens = async () => {
     try {
@@ -2786,6 +2817,7 @@ export default function Main() {
       
       const discoveredTokens = new Map();
       let totalTokensFound = 0;
+      const sessionParams = getSessionParams();
 
       // Step 1: Use Register API to discover all finance:token objects
       console.log('📊 Step 1: Querying register/list/finance:token with pagination...');
@@ -2799,6 +2831,7 @@ export default function Main() {
           console.log(`📋 Fetching page ${currentPage + 1}...`);
           
           const registerTokens = await NEXUS.utilities.apiCall('register/list/finance:token', {
+            ...sessionParams,
             limit: pageSize,
             page: currentPage,
             sort: 'modified',
@@ -2860,6 +2893,7 @@ export default function Main() {
           console.log(`🔎 Searching: ${criteria.name} with WHERE clause: ${criteria.where}`);
           
           const searchResults = await NEXUS.utilities.apiCall('register/list/finance:token', {
+            ...sessionParams,
             where: criteria.where,
             limit: 100,
             sort: 'ticker',
@@ -2888,6 +2922,7 @@ export default function Main() {
       
       try {
         const globalNames = await NEXUS.utilities.apiCall('register/list/names:global', {
+          ...sessionParams,
           where: '(results.name=*token* OR results.name=*TOKEN* OR results.name=*coin* OR results.name=*COIN*)',
           limit: 100,
           sort: 'name',
@@ -2902,6 +2937,7 @@ export default function Main() {
             try {
               if (globalName.name) {
                 const tokenInfo = await NEXUS.utilities.apiCall('register/get/finance:token', {
+                  ...sessionParams,
                   name: globalName.name
                 });
                 
@@ -2928,6 +2964,7 @@ export default function Main() {
       
       try {
         const localNames = await NEXUS.utilities.apiCall('register/list/names:name', {
+          ...sessionParams,
           where: '(results.name=*token* OR results.name=*TOKEN*)',
           limit: 100,
           sort: 'name',
@@ -2942,6 +2979,7 @@ export default function Main() {
             try {
               if (localName.name) {
                 const tokenInfo = await NEXUS.utilities.apiCall('register/get/finance:token', {
+                  ...sessionParams,
                   name: localName.name
                 });
                 
@@ -2969,6 +3007,7 @@ export default function Main() {
       try {
         // Search for tokens with any supply (including zero current supply but max supply > 0)
         const additionalTokens = await NEXUS.utilities.apiCall('register/list/finance:token', {
+          ...sessionParams,
           where: 'results.maxsupply>0', // Any token with maximum supply
           limit: 500,
           sort: 'created',
@@ -2991,25 +3030,28 @@ export default function Main() {
         console.warn('Additional Register API discovery failed:', error.message);
       }
 
-      // Step 6: Discover tokens from Market API - all active trading pairs
-      console.log('💹 Step 6: Discovering tokens from Market API (all active markets)...');
+      // Step 6: Comprehensive Market API Discovery - Find ALL actively trading tokens
+      console.log('💹 Step 6: Comprehensive Market API Discovery (all active markets)...');
       
       try {
-        // First, try to discover all active markets by checking common trading pairs
-        const commonTokens = ['NXS', 'CARBON', 'GOLD', 'SILVER', 'BTC', 'ETH', 'USDT', 'TOKEN', 'COIN'];
+        // Strategy 1: Check predefined common tokens (existing approach)
+        const commonTokens = ['NXS', 'CARBON', 'GOLD', 'SILVER', 'BTC', 'ETH', 'USDT', 'TOKEN', 'COIN', 'DIST', 'USD', 'NEXUS'];
         const marketTokens = new Set();
+        const discoveredMarkets = new Set();
         
-        // Check for active markets with common base tokens
+        console.log('🔍 Strategy 1: Checking predefined common tokens...');
         for (const baseToken of commonTokens) {
           try {
             // Try to find markets with this base token
             const marketData = await NEXUS.utilities.apiCall('market/list/order', {
+              ...sessionParams,
               market: `${baseToken}/NXS`,
-              limit: 1
+              limit: 10
             });
             
             if (marketData && (marketData.bids?.length > 0 || marketData.asks?.length > 0)) {
               marketTokens.add(baseToken);
+              discoveredMarkets.add(`${baseToken}/NXS`);
               console.log(`📈 Found active market: ${baseToken}/NXS`);
               
               // Extract token addresses from market orders
@@ -3042,18 +3084,21 @@ export default function Main() {
           }
         }
         
-        // Also check reverse pairs (NXS as quote token)
+        // Strategy 2: Check reverse pairs (NXS as quote token)
+        console.log('🔍 Strategy 2: Checking reverse pairs (NXS as quote token)...');
         for (const quoteToken of commonTokens) {
           if (quoteToken === 'NXS') continue;
           
           try {
             const marketData = await NEXUS.utilities.apiCall('market/list/order', {
+              ...sessionParams,
               market: `NXS/${quoteToken}`,
-              limit: 1
+              limit: 10
             });
             
             if (marketData && (marketData.bids?.length > 0 || marketData.asks?.length > 0)) {
               marketTokens.add(quoteToken);
+              discoveredMarkets.add(`NXS/${quoteToken}`);
               console.log(`📈 Found active market: NXS/${quoteToken}`);
               
               // Extract token addresses from market orders
@@ -3084,53 +3129,174 @@ export default function Main() {
           }
         }
         
-        console.log(`💹 Market API discovery complete: Found ${marketTokens.size} active markets`);
-        
-        // Additional discovery: Try to find tokens from any discovered tokens as base pairs
-        console.log('🔄 Expanding market discovery with discovered tokens...');
-        const discoveredTickers = Array.from(discoveredTokens.values())
+        // Strategy 3: Use ALL discovered tokens as potential trading pairs
+        console.log('🔍 Strategy 3: Using all discovered tokens as potential trading pairs...');
+        const allDiscoveredTickers = Array.from(discoveredTokens.values())
           .map(token => token.ticker)
           .filter(ticker => ticker && ticker !== 'NXS')
-          .slice(0, 20); // Limit to prevent too many API calls
+          .slice(0, 100); // Limit to prevent excessive API calls
         
-        for (const ticker of discoveredTickers) {
+        for (const ticker of allDiscoveredTickers) {
+          // Skip if we already checked this market
+          if (discoveredMarkets.has(`${ticker}/NXS`) || discoveredMarkets.has(`NXS/${ticker}`)) {
+            continue;
+          }
+          
+          try {
+            // Check ticker/NXS market
+            const marketData1 = await NEXUS.utilities.apiCall('market/list/order', {
+              ...sessionParams,
+              market: `${ticker}/NXS`,
+              limit: 5
+            });
+            
+            if (marketData1 && (marketData1.bids?.length > 0 || marketData1.asks?.length > 0)) {
+              marketTokens.add(ticker);
+              discoveredMarkets.add(`${ticker}/NXS`);
+              console.log(`📈 Found active market: ${ticker}/NXS`);
+              
+              // Extract additional tokens from these orders
+              [...(marketData1.bids || []), ...(marketData1.asks || [])].forEach(order => {
+                [order.contract, order.order].forEach(contract => {
+                  if (contract?.token && contract?.ticker) {
+                    try {
+                      const tokenAddress = contract.token;
+                      const tokenTicker = contract.ticker;
+                      
+                      if (tokenAddress !== '0' && !discoveredTokens.has(tokenAddress)) {
+                        discoveredTokens.set(tokenAddress, {
+                          address: tokenAddress,
+                          ticker: tokenTicker,
+                          source: 'market_api_comprehensive_discovery',
+                          marketPair: `${ticker}/NXS`,
+                          hasActiveMarket: true
+                        });
+                        console.log(`💹 Discovered token from comprehensive search: ${tokenTicker} (${tokenAddress})`);
+                      }
+                    } catch (tokenError) {
+                      // Skip invalid token data
+                    }
+                  }
+                });
+              });
+            }
+            
+            // Also check NXS/ticker market
+            const marketData2 = await NEXUS.utilities.apiCall('market/list/order', {
+              ...sessionParams,
+              market: `NXS/${ticker}`,
+              limit: 5
+            });
+            
+            if (marketData2 && (marketData2.bids?.length > 0 || marketData2.asks?.length > 0)) {
+              marketTokens.add(ticker);
+              discoveredMarkets.add(`NXS/${ticker}`);
+              console.log(`📈 Found active market: NXS/${ticker}`);
+              
+              // Extract additional tokens from these orders
+              [...(marketData2.bids || []), ...(marketData2.asks || [])].forEach(order => {
+                [order.contract, order.order].forEach(contract => {
+                  if (contract?.token && contract?.ticker) {
+                    try {
+                      const tokenAddress = contract.token;
+                      const tokenTicker = contract.ticker;
+                      
+                      if (tokenAddress !== '0' && !discoveredTokens.has(tokenAddress)) {
+                        discoveredTokens.set(tokenAddress, {
+                          address: tokenAddress,
+                          ticker: tokenTicker,
+                          source: 'market_api_comprehensive_discovery',
+                          marketPair: `NXS/${ticker}`,
+                          hasActiveMarket: true
+                        });
+                        console.log(`💹 Discovered token from comprehensive search: ${tokenTicker} (${tokenAddress})`);
+                      }
+                    } catch (tokenError) {
+                      // Skip invalid token data
+                    }
+                  }
+                });
+              });
+            }
+          } catch (marketError) {
+            // No active market for this pair, continue
+          }
+        }
+        
+        console.log(`💹 Comprehensive Market API discovery complete: Found ${marketTokens.size} active markets across ${discoveredMarkets.size} trading pairs`);
+        console.log(`📊 Discovered markets: ${Array.from(discoveredMarkets).join(', ')}`);
+        
+        // Strategy 4: Mark actively trading tokens for auto-discovery (like CARBON, GOLD, SILVER)
+        console.log('🔍 Strategy 4: Marking actively trading tokens for auto-discovery...');
+        const autoDiscoverableTokens = Array.from(discoveredTokens.values())
+          .filter(token => token.hasActiveMarket && token.ticker)
+          .map(token => token.ticker);
+        
+        console.log(`🎯 Auto-discoverable tokens for signature users: ${autoDiscoverableTokens.join(', ')}`);
+        
+        // Additional discovery: Try to find tokens from any discovered tokens as base pairs
+        console.log('🔄 Strategy 5: Expanding market discovery with discovered tokens...');
+        const newlyDiscoveredTickers = Array.from(discoveredTokens.values())
+          .filter(token => token.source === 'market_api_comprehensive_discovery')
+          .map(token => token.ticker)
+          .filter(ticker => ticker && ticker !== 'NXS')
+          .slice(0, 50); // Increased limit for comprehensive discovery
+        
+        for (const ticker of newlyDiscoveredTickers) {
+          // Skip if we already checked this market
+          if (discoveredMarkets.has(`${ticker}/NXS`)) {
+            continue;
+          }
+          
           try {
             // Check if this token has active markets
             const marketData = await NEXUS.utilities.apiCall('market/list/order', {
+              ...sessionParams,
               market: `${ticker}/NXS`,
-              limit: 1
+              limit: 5
             });
             
             if (marketData && (marketData.bids?.length > 0 || marketData.asks?.length > 0)) {
+              discoveredMarkets.add(`${ticker}/NXS`);
               console.log(`📈 Found additional active market: ${ticker}/NXS`);
               
               // Extract any additional tokens from these orders
               [...(marketData.bids || []), ...(marketData.asks || [])].forEach(order => {
-                if (order.order?.token && order.order?.ticker) {
-                  try {
-                    const tokenAddress = order.order.token;
-                    const tokenTicker = order.order.ticker;
-                    
-                    if (tokenAddress !== '0' && !discoveredTokens.has(tokenAddress)) {
-                      discoveredTokens.set(tokenAddress, {
-                        address: tokenAddress,
-                        ticker: tokenTicker,
-                        source: 'market_api_expansion',
-                        marketPair: `${ticker}/NXS`,
-                        hasActiveMarket: true
-                      });
-                      console.log(`💹 Discovered additional token: ${tokenTicker} (${tokenAddress})`);
+                [order.contract, order.order].forEach(contract => {
+                  if (contract?.token && contract?.ticker) {
+                    try {
+                      const tokenAddress = contract.token;
+                      const tokenTicker = contract.ticker;
+                      
+                      if (tokenAddress !== '0' && !discoveredTokens.has(tokenAddress)) {
+                        discoveredTokens.set(tokenAddress, {
+                          address: tokenAddress,
+                          ticker: tokenTicker,
+                          source: 'market_api_expansion',
+                          marketPair: `${ticker}/NXS`,
+                          hasActiveMarket: true
+                        });
+                        console.log(`💹 Discovered additional token: ${tokenTicker} (${tokenAddress})`);
+                      }
+                    } catch (tokenError) {
+                      // Skip invalid token data
                     }
-                  } catch (tokenError) {
-                    // Skip invalid token data
                   }
-                }
+                });
               });
             }
           } catch (marketError) {
             // No active market for this pair
           }
         }
+        
+        // Final summary of comprehensive market discovery
+        const finalMarketCount = discoveredMarkets.size;
+        const finalTokenCount = Array.from(discoveredTokens.values()).filter(token => token.hasActiveMarket).length;
+        console.log(`🎯 Final comprehensive market discovery results:`);
+        console.log(`   📊 Total active markets discovered: ${finalMarketCount}`);
+        console.log(`   🪙 Total tokens with active markets: ${finalTokenCount}`);
+        console.log(`   🔍 All discovered markets: ${Array.from(discoveredMarkets).sort().join(', ')}`);
         
       } catch (error) {
         console.warn('Market API discovery failed:', error.message);
@@ -3140,12 +3306,13 @@ export default function Main() {
       console.log('🔍 Step 7: Enhancing market-discovered tokens with Register API data...');
       
       const marketDiscoveredTokens = Array.from(discoveredTokens.values())
-        .filter(token => token.source === 'market_api_discovery');
+        .filter(token => token.source?.includes('market_api'));
       
       for (const marketToken of marketDiscoveredTokens) {
         try {
           // Try to get full token information from Register API
           const fullTokenInfo = await NEXUS.utilities.apiCall('register/get/finance:token', {
+            ...sessionParams,
             address: marketToken.address
           });
           
@@ -3155,25 +3322,87 @@ export default function Main() {
               ...fullTokenInfo,
               source: 'market_api_enhanced',
               marketPair: marketToken.marketPair,
-              hasActiveMarket: true
+              hasActiveMarket: true,
+              autoDiscoverable: true // Mark for auto-discovery
             });
             console.log(`🔍 Enhanced market token: ${fullTokenInfo.ticker || marketToken.ticker}`);
           }
         } catch (error) {
           // Keep the basic market token info if Register API fails
           console.warn(`Could not enhance market token ${marketToken.ticker}:`, error.message);
+          // Still mark as auto-discoverable even if enhancement fails
+          discoveredTokens.set(marketToken.address, {
+            ...marketToken,
+            autoDiscoverable: true
+          });
         }
       }
       
+      // Step 8: Auto-add actively trading tokens for signature users
+      console.log('🎯 Step 8: Auto-adding actively trading tokens for signature users...');
+      
+      const autoDiscoverableTokens = Array.from(discoveredTokens.values())
+        .filter(token => token.hasActiveMarket && token.autoDiscoverable && token.ticker);
+      
+      console.log(`🚀 Auto-discoverable tokens (${autoDiscoverableTokens.length}): ${autoDiscoverableTokens.map(t => t.ticker).join(', ')}`);
+      
+      // Add these tokens to the main discovered tokens list with special marking
+      autoDiscoverableTokens.forEach(token => {
+        if (token.address && !discoveredTokens.has(token.address)) {
+          discoveredTokens.set(token.address, {
+            ...token,
+            source: 'auto_discovered_market_token',
+            priority: 'high', // Give priority to actively trading tokens
+            description: `Actively trading token discovered from ${token.marketPair} market`
+          });
+        } else if (token.address && discoveredTokens.has(token.address)) {
+          // Update existing token with auto-discovery info
+          const existingToken = discoveredTokens.get(token.address);
+          discoveredTokens.set(token.address, {
+            ...existingToken,
+            hasActiveMarket: true,
+            autoDiscoverable: true,
+            priority: 'high',
+            marketPair: token.marketPair || existingToken.marketPair
+          });
+        }
+      });
+      
+      console.log(`✅ Successfully processed ${autoDiscoverableTokens.length} auto-discoverable tokens for signature users`);
+      
       // Convert Map to Array and enhance with market data
       const tokensArray = Array.from(discoveredTokens.values());
+      
+      // Prioritize actively trading tokens
+      const prioritizedTokens = tokensArray.sort((a, b) => {
+        // First priority: actively trading tokens
+        if (a.hasActiveMarket && !b.hasActiveMarket) return -1;
+        if (!a.hasActiveMarket && b.hasActiveMarket) return 1;
+        
+        // Second priority: auto-discoverable tokens
+        if (a.autoDiscoverable && !b.autoDiscoverable) return -1;
+        if (!a.autoDiscoverable && b.autoDiscoverable) return 1;
+        
+        // Third priority: high priority tokens
+        if (a.priority === 'high' && b.priority !== 'high') return -1;
+        if (a.priority !== 'high' && b.priority === 'high') return 1;
+        
+        // Fourth priority: alphabetical by ticker
+        const tickerA = a.ticker || '';
+        const tickerB = b.ticker || '';
+        return tickerA.localeCompare(tickerB);
+      });
+      
       console.log(`🎯 Total unique tokens discovered: ${tokensArray.length}`);
+      console.log(`🚀 Actively trading tokens: ${tokensArray.filter(t => t.hasActiveMarket).length}`);
+      console.log(`⭐ Auto-discoverable tokens: ${tokensArray.filter(t => t.autoDiscoverable).length}`);
+      console.log(`🔥 High priority tokens: ${tokensArray.filter(t => t.priority === 'high').length}`);
 
       // Step 8: Enhance tokens with market activity data using parallel processing
       console.log('📈 Step 8: Enhancing tokens with market activity data...');
       
       const enhancedTokens = await Promise.allSettled(
-        tokensArray.map(async (token) => {
+        prioritizedTokens.map(async (token) => {
           try {
             let marketActivity = {
               hasMarket: false,
@@ -3243,24 +3472,37 @@ export default function Main() {
 
       console.log(`✅ Successfully enhanced ${validTokens.length} tokens`);
 
-      // Sort tokens by relevance and activity
+      // Sort tokens by relevance and activity (preserving auto-discoverable priority)
       const sortedTokens = validTokens.sort((a, b) => {
-        // Active markets first
-        if (a.marketActivity.hasMarket !== b.marketActivity.hasMarket) {
-          return b.marketActivity.hasMarket ? 1 : -1;
+        // First priority: auto-discoverable tokens (actively trading)
+        if (a.autoDiscoverable && !b.autoDiscoverable) return -1;
+        if (!a.autoDiscoverable && b.autoDiscoverable) return 1;
+        
+        // Second priority: tokens with active markets
+        const aHasMarket = a.hasActiveMarket || a.marketActivity?.hasMarket;
+        const bHasMarket = b.hasActiveMarket || b.marketActivity?.hasMarket;
+        if (aHasMarket !== bHasMarket) {
+          return bHasMarket ? 1 : -1;
         }
-        // Then by market activity
-        const aActivity = a.marketActivity.activeBids + a.marketActivity.activeAsks;
-        const bActivity = b.marketActivity.activeBids + b.marketActivity.activeAsks;
+        
+        // Third priority: high priority tokens
+        if (a.priority === 'high' && b.priority !== 'high') return -1;
+        if (a.priority !== 'high' && b.priority === 'high') return 1;
+        
+        // Fourth priority: market activity level
+        const aActivity = (a.marketActivity?.activeBids || 0) + (a.marketActivity?.activeAsks || 0);
+        const bActivity = (b.marketActivity?.activeBids || 0) + (b.marketActivity?.activeAsks || 0);
         if (aActivity !== bActivity) {
           return bActivity - aActivity;
         }
-        // Then by current supply
+        
+        // Fifth priority: current supply
         const aSupply = a.currentSupply || 0;
         const bSupply = b.currentSupply || 0;
         if (aSupply !== bSupply) {
           return bSupply - aSupply;
         }
+        
         // Finally by ticker alphabetically
         const aTicker = a.ticker || '';
         const bTicker = b.ticker || '';
@@ -4949,9 +5191,9 @@ export default function Main() {
 
           <Button
             onClick={createMarketOrder}
-            disabled={loading || !orderForm.amount || !orderForm.price || !orderForm.from || !orderForm.to}
+            disabled={loading || !orderForm.amount || !orderForm.price}
             style={{
-              background: !loading && orderForm.amount && orderForm.price && orderForm.from && orderForm.to
+              background: !loading && orderForm.amount && orderForm.price
                 ? (orderForm.type === 'bid' 
                   ? 'linear-gradient(135deg, #4ade80 0%, #059669 100%)' 
                   : 'linear-gradient(135deg, #f87171 0%, #dc2626 100%)')
@@ -4963,7 +5205,7 @@ export default function Main() {
               fontWeight: '600',
               fontSize: '16px',
               transition: 'all 0.2s ease',
-              cursor: !loading && orderForm.amount && orderForm.price && orderForm.from && orderForm.to ? 'pointer' : 'not-allowed',
+              cursor: !loading && orderForm.amount && orderForm.price ? 'pointer' : 'not-allowed',
               width: '100%',
               marginTop: '16px'
             }}
@@ -8404,7 +8646,7 @@ export default function Main() {
               
               {/* Token rows */}
               {paginatedTokens.map((token, index) => {
-                const hasMarketActivity = availableMarkets.includes(`${token.ticker}/NXS`);
+                const hasMarketActivity = token.marketActivity?.hasMarket || availableMarkets.includes(`${token.ticker}/NXS`);
                 const isSelected = selectedTokensForPairs.find(t => t.ticker === token.ticker);
                 
                 return (
@@ -8661,7 +8903,10 @@ export default function Main() {
         <div style={{ display: 'grid', gap: '8px' }}>
           {selectedTradingPairs.map((pairData, index) => {
             const isActive = activeTradingPair === pairData.pair;
-            const hasMarketActivity = availableMarkets.includes(pairData.pair);
+            // Check market activity from token data or fallback to availableMarkets
+            const baseToken = pairData.pair.split('/')[0];
+            const tokenData = allTokens.find(t => t.ticker === baseToken);
+            const hasMarketActivity = tokenData?.marketActivity?.hasMarket || availableMarkets.includes(pairData.pair);
             
             return (
               <div
