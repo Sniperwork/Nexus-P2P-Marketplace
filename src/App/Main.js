@@ -1899,21 +1899,11 @@ export default function Main() {
     const validation = validateCrossTokenTradingPair(selectedMarket);
     
     if (!validation.isValid) {
-      // Show confirmation dialog first
-      const userConfirmed = await NEXUS.utilities.confirm({
-        question: `You don't have the required token accounts for this trading pair. Do you want to proceed anyway?`,
-        note: `Missing accounts for: ${validation.missingAccounts.join(', ')}`,
-        labelYes: 'Proceed Anyway',
-        labelNo: 'Cancel'
+      // Show validation error message
+      NEXUS.utilities.showErrorDialog({
+        message: 'Trading Pair Validation Failed',
+        note: `Missing accounts for: ${validation.missingAccounts.join(', ')}\n\nPlease create accounts for these tokens in the Wallet tab first.`,
       });
-      
-      if (userConfirmed) {
-        // User confirmed, show the validation error message
-        NEXUS.utilities.showErrorDialog({
-          message: 'Trading Pair Validation Failed',
-          note: `Missing accounts for: ${validation.missingAccounts.join(', ')}\n\nPlease create accounts for these tokens in the Wallet tab first.`,
-        });
-      }
       return;
     }
 
